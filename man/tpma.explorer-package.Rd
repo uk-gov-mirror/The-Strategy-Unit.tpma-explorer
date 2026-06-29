@@ -27,6 +27,7 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item Zoë Turner \email{zoe.turner3@nhs.net} [contributor]
   \item Claire Welsh \email{claire.welsh8@nhs.net} [contributor]
 }
 
