@@ -4,6 +4,7 @@ Version: 0.6.0
 Authors@R: c(
     person("Matt", "Dray", , "matt.dray@nhs.net", role = c("aut", "cre")),
     person("Tom", "Jemmett", , "thomas.jemmett@nhs.net", role = "aut"),
+    person("Zoë", "Turner", , "zoe.turner3@nhs.net", role = "ctb"),
     person("Claire", "Welsh", , "claire.welsh8@nhs.net", role = "ctb")
   )
 Description: A Shiny-app-in-a-package to explore data related to Types of
@@ -50,7 +51,7 @@ Suggests:
     withr
 Remotes:
     The-Strategy-Unit/azkit
+Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-Config/roxygen2/version: 8.0.0
