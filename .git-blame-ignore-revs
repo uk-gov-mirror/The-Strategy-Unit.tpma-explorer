@@ -1,2 +1,4 @@
-a8916c16e60be86e2d054915da39a4ff52e14291 # reformatted scripts with air from lintr
-c48a5c8e37b7e0848753adf1f9bbd373710e1be28 # removed nolint comments resulting in formatting with air from lintr
+# Associated with lint changes in PRs 182 and 184
+a8916c16e60be86e2d054915da39a4ff52e14291
+c48a5c8e37b7e0848753adf1f9bbd373710e1be2
+b5bb60918423a1598f480e846326ff37334bacae
