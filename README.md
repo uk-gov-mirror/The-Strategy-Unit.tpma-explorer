@@ -34,13 +34,13 @@ To develop the app, you must:
 
 Underlying data is generated via the NHP inputs-data pipeline in [the nhp_data repository](https://github.com/The-Strategy-Unit/nhp_data/) and is read into the app from the relevant Azure container (named in the `AZ_CONTAINER_INPUTS` environment variable).
 
-#### Invalidation
+#### Re-fetch data
 
 Note that the inputs data is downloaded to the `app_data/` folder when you `run_app()`.
 
-Locally, you can force-redownload the data by (a) deleting `app_data/` and re-sourcing `app.R`, or (b) by running  `get_all_data()` with the argument `redownload = TRUE`.
+Locally, you can force-redownload the data by (a) deleting `app_data/` and re-sourcing `app.R`, or (b) by running `get_all_data()` with the argument `redownload = TRUE`.
 
-On the server, authorised devs can invalidate the current cache by appending `?reset_cache=true` to the apps' canonical URLs (i.e. `https://connect.strategyunitwm.nhs.uk/tpma-explorer` and `/tpma-explorer-dev`).
+On the server, authorised devs can invalidate the current data cache by appending `?reset_cache=true` to the apps' canonical URLs (i.e. `https://connect.strategyunitwm.nhs.uk/tpma-explorer` and `/tpma-explorer-dev`).
 The data will be re-fetched the next time the app starts up.
 
 ### Files
