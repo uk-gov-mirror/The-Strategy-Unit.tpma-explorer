@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![](https://img.shields.io/badge/Shiny-shinylive-447099?style=flat&labelColor=white&logo=Posit&logoColor=447099)](https://connect.strategyunitwm.nhs.uk/tpma-explorer/)
+[![Connect](https://img.shields.io/badge/Connect-Shiny-447099?style=flat&labelColor=white&logo=Posit&logoColor=447099)](https://connect.strategyunitwm.nhs.uk/tpma-explorer/)
 [![R-CMD-check](https://github.com/The-Strategy-Unit/tpma-explorer/actions/workflows/check.yaml/badge.svg)](https://github.com/The-Strategy-Unit/tpma-explorer/actions/workflows/check.yaml)
 [![Lint](https://github.com/The-Strategy-Unit/tpma-explorer/actions/workflows/check-jarl.yaml/badge.svg)](https://github.com/The-Strategy-Unit/tpma-explorer/actions/workflows/check-jarl.yaml)
 [![codecov](https://codecov.io/gh/The-Strategy-Unit/tpma-explorer/branch/main/graph/badge.svg)](https://codecov.io/gh/The-Strategy-Unit/tpma-explorer)
@@ -11,7 +11,7 @@
 A web app to explore opportunities to reduce hospital care via Types of Potentially-Mitigatable Activity (TPMAs).
 
 The app is [deployed openly to Posit Connect](https://connect.strategyunitwm.nhs.uk/tpma-explorer/) with no access requirements.
-Developers can also access [a development version](https://connect.strategyunitwm.nhs.uk/tpma-explorer-dev/) of the app. 
+Developers can also access [a development version](https://connect.strategyunitwm.nhs.uk/tpma-explorer-dev/) of the app.
 
 ## For developers
 
