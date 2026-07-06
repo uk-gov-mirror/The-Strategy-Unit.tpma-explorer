@@ -33,7 +33,7 @@ To launch the app locally for development purposes, run `source("app.R")`.
 Before submitting a pull request, run locally:
 
 * an R-CMD check, e.g. from the R console with `devtools::check()`
-* the test suite, e.g. from the R console with `testthat::test()`
+* the test suite, e.g. from the R console with `testthat::test()`, noting that you must reach 100% test coverage
 * a format check, e.g. in your terminal with `air format .`
 * a lint check, e.g. in your terminal with `jarl check .`
 
