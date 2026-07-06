@@ -17,9 +17,11 @@ Developers can also access [a development version](https://connect.strategyunitw
 
 This section is aimed at maintainers of the tool who work for The Strategy Unit Data Science team.
 
-### Run and deploy
+### Framework
 
 The app is made with [Shiny](https://shiny.posit.co/) and is an R package following [the nolem approach](https://github.com/StatsRhian/nolem).
+
+### Prerequisites
 
 To develop the app, you must first:
 
@@ -27,6 +29,8 @@ To develop the app, you must first:
 * run `pak::pak()` to install required and developmental dependencies from the `DESCRIPTION`
 * [install Air](https://posit-dev.github.io/air/), which is used for formatting the code
 * [install Jarl](https://jarl.etiennebacher.com/), which is used for linting the code
+
+### Develop and deploy
 
 To launch the app locally for development purposes, run `source("app.R")`.
 
