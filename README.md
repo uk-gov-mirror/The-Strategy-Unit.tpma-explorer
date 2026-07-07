@@ -32,7 +32,7 @@ To develop the app, you must first:
 
 ### Develop and deploy
 
-To launch the app locally for development purposes, run `source("app.R")`.
+To launch the app locally for development purposes, run `pkgload::load_all()` and then `run_app()`.
 
 Before submitting a pull request, run locally:
 
