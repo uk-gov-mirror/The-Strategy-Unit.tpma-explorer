@@ -245,8 +245,9 @@
       <li>see a <a href="https://connect.strategyunitwm.nhs.uk/nhp/project_information/user_guide/mitigators_lookup.html"><strong>TPMA lookup</strong></a>, including names, codes and deprecation status</li>
       </ul>
       <p><strong>Peers</strong> are nearest statistical neighbours to the chosen unit.
-      Peers for NHS provider trusts are from <a href="https://app.powerbi.com/view?r=eyJrIjoiMjdiOWQ4YTktNmNiNC00MmIwLThjNzktNWVmMmJmMzllNmViIiwidCI6IjUwZjYwNzFmLWJiZmUtNDAxYS04ODAzLTY3Mzc0OGU2MjllMiIsImMiOjh9">the NHP Trust Peer Finder Tool</a> and for local authorities from the <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/adhocs/3048statisticalnearestneighboursforenglishuppertierandlowertierlocalauthorities">ONS</a>.
-      Note that the LA nearest-neighbours are for 2025 but the LA data is for 2023, which may lead to incomplete matches.</p>
+      Peers for NHS provider trusts are from <a href="https://app.powerbi.com/view?r=eyJrIjoiMjdiOWQ4YTktNmNiNC00MmIwLThjNzktNWVmMmJmMzllNmViIiwidCI6IjUwZjYwNzFmLWJiZmUtNDAxYS04ODAzLTY3Mzc0OGU2MjllMiIsImMiOjh9">the NHP Trust Peer Finder Tool</a> (2019) and for local authorities from the <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing/adhocs/3048statisticalnearestneighboursforenglishuppertierandlowertierlocalauthorities">ONS</a> (2025).
+      Note that there may be incomplete matches between datasets and peers given differences in the year they were derived.
+      Peers for providers R0B and R0D were inherited from their predecessors.</p>
       </div>
                               <script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
                             </div>
@@ -258,7 +259,7 @@
                                 <p>This app was built and is maintained by <a href="https://www.strategyunitwm.nhs.uk/">The Strategy Unit</a>.
       The source code can be found in <a href="https://github.com/The-Strategy-Unit/tpma-explorer/">the open tpma-explorer GitHub repository</a>.</p>
       
-                                Version 0.6.2.
+                                Version 0.6.3.
                               </div>
                               <script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
                             </div>
