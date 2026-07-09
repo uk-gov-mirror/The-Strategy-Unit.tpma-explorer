@@ -4,17 +4,6 @@
 mod_select_strategy_ui <- function(id) {
   ns <- shiny::NS(id)
   shiny::tagList(
-    shiny::checkboxInput(
-      ns("strategy_care_shift_checkbox"),
-      label = bslib::tooltip(
-        trigger = list(
-          "Filter for care-shift TPMAs",
-          bsicons::bs_icon("info-circle")
-        ),
-        md_file_to_html("app", "text", "sidebar-tooltip-careshift.md"),
-      ),
-      value = FALSE
-    ),
     shiny::selectInput(
       ns("strategy_activity_type_select"),
       label = bslib::tooltip(
@@ -104,10 +93,7 @@ mod_select_strategy_server <- function(id) {
       shiny::req(input$strategy_activity_type_select)
 
       strategies_lookup |>
-        dplyr::filter(
-          .data$activity_type == input$strategy_activity_type_select,
-          .data$is_care_shift | !input$strategy_care_shift_checkbox
-        )
+        dplyr::filter(.data$activity_type == input$strategy_activity_type_select)
     })
 
     shiny::observe({
