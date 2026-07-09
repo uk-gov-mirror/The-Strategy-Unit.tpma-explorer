@@ -20,17 +20,6 @@ mod_select_strategy_ui <- function(id) {
       )
     ),
     shiny::selectInput(
-      ns("strategy_category_select"),
-      label = bslib::tooltip(
-        trigger = list(
-          "Filter by TPMA category",
-          bsicons::bs_icon("info-circle")
-        ),
-        md_file_to_html("app", "text", "sidebar-tooltip-category.md"),
-      ),
-      choices = NULL
-    ),
-    shiny::selectInput(
       ns("strategy_select"),
       label = bslib::tooltip(
         trigger = list("Choose a TPMA", bsicons::bs_icon("info-circle")),
@@ -97,22 +86,7 @@ mod_select_strategy_server <- function(id) {
     })
 
     shiny::observe({
-      category_choices <- strategies_filtered() |>
-        dplyr::distinct(.data$category_name, .data$category) |>
-        tibble::deframe()
-
-      shiny::updateSelectInput(
-        session,
-        "strategy_category_select",
-        choices = category_choices
-      )
-    })
-
-    shiny::observe({
-      strategy_category <- shiny::req(input$strategy_category_select)
-
       strategy_choices <- strategies_filtered() |>
-        dplyr::filter(.data$category == .env$strategy_category) |>
         dplyr::select("strategy_name", "strategy") |>
         tibble::deframe()
 
@@ -123,7 +97,7 @@ mod_select_strategy_server <- function(id) {
         selected = NULL
       )
     }) |>
-      shiny::bindEvent(input$strategy_category_select)
+      shiny::bindEvent(input$strategy_activity_type_select)
 
     shiny::reactive(input$strategy_select)
   })
