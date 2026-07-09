@@ -3,7 +3,8 @@
 #' @noRd
 mod_select_geography_ui <- function(id) {
   ns <- shiny::NS(id)
-  shiny::selectInput(
+
+  shiny::radioButtons(
     ns("geography_select"),
     label = bslib::tooltip(
       trigger = list(
