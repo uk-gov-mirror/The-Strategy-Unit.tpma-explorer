@@ -4,7 +4,7 @@
 mod_select_strategy_ui <- function(id) {
   ns <- shiny::NS(id)
   shiny::tagList(
-    shiny::selectInput(
+    shiny::checkboxGroupInput(
       ns("strategy_activity_type_select"),
       label = bslib::tooltip(
         trigger = list(
@@ -17,7 +17,8 @@ mod_select_strategy_ui <- function(id) {
         "Inpatients" = "ip",
         "Outpatients" = "op",
         "Accident & Emergency" = "ae"
-      )
+      ),
+      selected = "ip"
     ),
     shiny::selectInput(
       ns("strategy_select"),
@@ -82,7 +83,8 @@ mod_select_strategy_server <- function(id) {
       shiny::req(input$strategy_activity_type_select)
 
       strategies_lookup |>
-        dplyr::filter(.data$activity_type == input$strategy_activity_type_select)
+        dplyr::filter(.data$activity_type %in% input$strategy_activity_type_select) |>
+        dplyr::arrange(.data$strategy_name)
     })
 
     shiny::observe({
