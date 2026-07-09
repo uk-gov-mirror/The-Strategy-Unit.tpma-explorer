@@ -47,21 +47,6 @@ mod_select_provider_server <- function(id, selected_geography) {
       )
     })
 
-    # handle the onRestored event for bookmarking
-    # cannot directly test onRestored, so separate into a function which can be
-    # tested.
-    restore <- function(state) {
-      # Enforce loading of selection when restoring from a bookmark
-      shiny::updateSelectInput(
-        session,
-        "provider_select",
-        selected = state$input$provider_select
-      )
-
-      invisible(NULL)
-    }
-    shiny::onRestored(restore)
-
     shiny::reactive(input$provider_select)
   })
 }
