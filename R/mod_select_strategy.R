@@ -14,9 +14,9 @@ mod_select_strategy_ui <- function(id) {
         md_file_to_html("app", "text", "sidebar-tooltip-activity.md"),
       ),
       choices = c(
+        "A&E",
         "Inpatients",
-        "Outpatients",
-        "Accident & Emergency"
+        "Outpatients"
       ),
       selected = "Inpatients"
     ),
@@ -75,6 +75,7 @@ mod_select_strategy_server <- function(id) {
 
     shiny::observe({
       strategy_choices <- strategies_filtered() |>
+        split(
           # to get dropdown section labels like 'Inpatients: De-adoption'
           list(
             strategies_filtered()$activity_type,
@@ -85,6 +86,8 @@ mod_select_strategy_server <- function(id) {
         purrr::map(\(x) {
           x |> dplyr::select("tpma_name_full", "tpma_code") |> tibble::deframe()
         })
+
+      strategy_choices <- strategy_choices[sort(names(strategy_choices))]
 
       shiny::updateSelectInput(
         session,
