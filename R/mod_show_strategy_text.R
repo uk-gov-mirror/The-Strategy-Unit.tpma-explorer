@@ -17,7 +17,12 @@ mod_show_strategy_text_ui <- function(id) {
 #' @return a character vector of the strategy stubs.
 #' @noRd
 mod_show_strategy_text_get_descriptions_lookup <- function() {
-  yyjsonr::read_json_file(app_sys("app", "reference", "descriptions.json"))
+  # TODO: move this into the TPMAs repo? See:
+  # https://github.com/The-Strategy-Unit/TPMAs/issues/16
+  readr::read_csv(
+    app_sys("app", "reference", "tpma-description-lookup.csv"),
+    col_types = "c"
+  )
 }
 
 #' Show Strategy Description Server
@@ -27,7 +32,6 @@ mod_show_strategy_text_server <- function(
   id,
   selected_strategy
 ) {
-  # load static data items
   descriptions_lookup <- mod_show_strategy_text_get_descriptions_lookup()
 
   # return the shiny module
@@ -35,8 +39,9 @@ mod_show_strategy_text_server <- function(
     strategy_stub <- shiny::reactive({
       strategy <- shiny::req(selected_strategy())
 
-      is_stub <- stringr::str_detect(strategy, descriptions_lookup)
-      descriptions_lookup[is_stub]
+      descriptions_lookup |>
+        dplyr::filter(tpma_code == strategy) |>
+        dplyr::pull(tpma_description_name)
     })
 
     strategy_text <- shiny::reactive({
