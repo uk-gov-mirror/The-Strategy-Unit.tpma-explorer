@@ -84,7 +84,9 @@ mod_select_strategy_server <- function(id) {
           sep = ": "
         ) |>
         purrr::map(\(x) {
-          x |> dplyr::select("tpma_name_full", "tpma_code") |> tibble::deframe()
+          x |>
+            dplyr::select("tpma_name_full", "tpma_variable") |>
+            tibble::deframe()
         })
 
       strategy_choices <- strategy_choices[sort(names(strategy_choices))]
