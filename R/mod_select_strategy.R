@@ -20,6 +20,23 @@ mod_select_strategy_ui <- function(id) {
       ),
       selected = "Inpatients"
     ),
+    shiny::checkboxGroupInput(
+      ns("strategy_mechanism_select"),
+      label = bslib::tooltip(
+        trigger = list(
+          "Filter by mechanism",
+          bsicons::bs_icon("info-circle")
+        ),
+        md_file_to_html("app", "text", "sidebar-tooltip-activity.md"), # TODO: new tooltip md
+      ),
+      choices = c(
+        "De-adoption",
+        "Hospital Efficiency",
+        "Prevention",
+        "Redirection/Substitution"
+      ),
+      selected = "Hospital Efficiency"
+    ),
     shiny::selectInput(
       ns("strategy_select"),
       label = bslib::tooltip(
@@ -67,9 +84,13 @@ mod_select_strategy_server <- function(id) {
   shiny::moduleServer(id, function(input, output, session) {
     strategies_filtered <- shiny::reactive({
       shiny::req(input$strategy_activity_type_select)
+      shiny::req(input$strategy_mechanism_select)
 
       strategies_lookup |>
-        dplyr::filter(.data$activity_type %in% input$strategy_activity_type_select) |>
+        dplyr::filter(
+          .data$activity_type %in% input$strategy_activity_type_select,
+          .data$tpma_mechanism %in% input$strategy_mechanism_select,
+        ) |>
         dplyr::arrange(.data$tpma_code)
     })
 
@@ -98,7 +119,10 @@ mod_select_strategy_server <- function(id) {
         selected = NULL
       )
     }) |>
-      shiny::bindEvent(input$strategy_activity_type_select)
+      shiny::bindEvent(
+        input$strategy_activity_type_select,
+        input$strategy_mechanism_select
+      )
 
     shiny::reactive(input$strategy_select)
   })
