@@ -14,11 +14,11 @@ mod_select_strategy_ui <- function(id) {
         md_file_to_html("app", "text", "sidebar-tooltip-activity.md"),
       ),
       choices = c(
-        "Inpatients" = "ip",
-        "Outpatients" = "op",
-        "Accident & Emergency" = "ae"
+        "Inpatients",
+        "Outpatients",
+        "Accident & Emergency"
       ),
-      selected = "ip"
+      selected = "Inpatients"
     ),
     shiny::selectInput(
       ns("strategy_select"),
@@ -40,34 +40,20 @@ mod_select_strategy_ui <- function(id) {
 #' @return A data.frame.
 #' @noRd
 mod_select_strategy_get_strategies <- function() {
-  # Read local lookups
-  categories <- app_sys("app", "reference", "mitigator-categories.csv") |>
-    readr::read_csv(
-      col_types = readr::cols(
-        .default = "c",
-        is_care_shift = readr::col_logical()
-      )
-    )
-  strategies <- app_sys("app", "reference", "mitigators.json") |>
-    yyjsonr::read_json_file()
-
-  strategies |>
-    unlist() |>
-    tibble::enframe("strategy", "strategy_name") |>
+  # TODO: change path when merged to main
+  readr::read_csv(
+    "https://raw.githubusercontent.com/The-Strategy-Unit/TPMAs/refs/heads/10-lookup-update/reference/tpma-lookup.csv",
+    col_types = "c"
+  ) |>
+    dplyr::filter(is.na(.data$active_to)) |>
     dplyr::mutate(
-      activity_type = stringr::str_extract(
-        .data$strategy_name,
-        "(?<= \\()(IP|OP|AE)(?=-(AA|EF))" # e.g. 'IP' in 'IP-AA-001'
-      ) |>
-        stringr::str_to_lower(),
-      activity_type_name = dplyr::recode_values(
-        .data$activity_type,
-        "ip" ~ "Inpatients",
-        "op" ~ "Outpatients",
-        "ae" ~ "Accident & Emergency"
+      tpma_name_full = dplyr::if_else(
+        is.na(.data$tpma_subtype),
+        glue::glue("{tpma_code}: {tpma_name}"),
+        glue::glue("{tpma_code}: {tpma_name} ({tpma_subtype})")
       )
     ) |>
-    dplyr::left_join(categories, by = "strategy")
+    dplyr::relocate(.data$tpma_name_full, .after = .data$tpma_subtype)
 }
 
 #' Select Strategy Server
@@ -84,13 +70,21 @@ mod_select_strategy_server <- function(id) {
 
       strategies_lookup |>
         dplyr::filter(.data$activity_type %in% input$strategy_activity_type_select) |>
-        dplyr::arrange(.data$strategy_name)
+        dplyr::arrange(.data$tpma_code)
     })
 
     shiny::observe({
       strategy_choices <- strategies_filtered() |>
-        dplyr::select("strategy_name", "strategy") |>
-        tibble::deframe()
+          # to get dropdown section labels like 'Inpatients: De-adoption'
+          list(
+            strategies_filtered()$activity_type,
+            strategies_filtered()$tpma_mechanism
+          ),
+          sep = ": "
+        ) |>
+        purrr::map(\(x) {
+          x |> dplyr::select("tpma_name_full", "tpma_code") |> tibble::deframe()
+        })
 
       shiny::updateSelectInput(
         session,
