@@ -29,6 +29,7 @@ mod_plot_rates_funnel_ui <- function(id) {
 #'     plot U-Prime lines.
 #' @param y_axis_limits Numeric vector. Min and max values for the y axis.
 #' @param x_axis_title Character. Title for the x-axis.
+#' @param selected_strategy Reactive. Selected strategy variable name (or `NULL`).
 #' @param base_size Numeric scalar. For scaling plot-element sizes.
 #' @noRd
 mod_plot_rates_funnel_server <- function(
@@ -37,11 +38,15 @@ mod_plot_rates_funnel_server <- function(
   funnel_calculations,
   y_axis_limits,
   x_axis_title,
+  selected_strategy,
   base_size
 ) {
   shiny::moduleServer(id, function(input, output, session) {
     output$rates_funnel_plot <- shiny::renderPlot({
+      validate_strategy_selected(selected_strategy())
+
       rates <- rates()
+
       shiny::validate(shiny::need(
         nrow(rates) > 0,
         "No data available for these selections."
