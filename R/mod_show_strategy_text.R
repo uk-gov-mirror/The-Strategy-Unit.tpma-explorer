@@ -50,6 +50,8 @@ mod_show_strategy_text_server <- function(
     })
 
     output$strategy_text <- shiny::renderText({
+      validate_strategy_selected(selected_strategy())
+
       t <- shiny::req(strategy_text())
       md_string_to_html(t)
     })
