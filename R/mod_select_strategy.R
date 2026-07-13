@@ -113,7 +113,7 @@ mod_select_strategy_server <- function(id) {
         # string and must handle this in downstream modules.
         shiny::updateSelectInput(
           inputId = "strategy_select",
-          choices = c("No TPMAs available" = ""), # requires empty-string value
+          choices = c("No TPMAs to show" = ""), # requires empty-string value
           selected = ""
         )
         shinyjs::disable("strategy_select")
@@ -149,6 +149,18 @@ mod_select_strategy_server <- function(id) {
         input$strategy_mechanism_select
       )
 
-    shiny::reactive(input$strategy_select)
+    selected_strategy <- shiny::reactive({
+      # Depend on the filtered strategies as well as the select input
+      choices_df <- strategies_filtered()
+
+      # If there are no valid TPMAs, there is no selected strategy
+      if (nrow(choices_df) == 0) {
+        return(NULL)
+      }
+
+      input$strategy_select
+    })
+
+    selected_strategy
   })
 }
