@@ -49,27 +49,22 @@ mod_table_diagnoses_server <- function(
     diagnoses_prepared <- shiny::reactive({
       geography <- shiny::req(selected_geography())
       provider <- shiny::req(selected_provider())
-      strategy <- shiny::req(selected_strategy())
       year <- shiny::req(selected_year())
 
       prepare_diagnoses_data(
         diagnoses_lookup,
         geography,
         provider,
-        strategy,
+        selected_strategy(),
         year
       )
     })
 
     output$diagnoses_table <- gt::render_gt({
-      df <- diagnoses_prepared()
+      validate_strategy_selected(selected_strategy())
 
-      shiny::validate(
-        shiny::need(
-          !is.null(df) && nrow(df) > 0,
-          "No diagnoses to display."
-        )
-      )
+      df <- diagnoses_prepared()
+      shiny::validate(shiny::need(nrow(df) > 0, "No diagnoses to display."))
 
       entable_encounters(df)
     })
