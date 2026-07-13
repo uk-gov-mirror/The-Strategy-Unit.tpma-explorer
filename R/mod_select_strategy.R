@@ -11,7 +11,7 @@ mod_select_strategy_ui <- function(id) {
           "Filter by activity type",
           bsicons::bs_icon("info-circle")
         ),
-        md_file_to_html("app", "text", "sidebar-tooltip-activity.md"),
+        md_file_to_html("app", "text", "sidebar-tooltip-activity.md")
       ),
       choices = c(
         "A&E",
@@ -27,7 +27,7 @@ mod_select_strategy_ui <- function(id) {
           "Filter by mechanism",
           bsicons::bs_icon("info-circle")
         ),
-        md_file_to_html("app", "text", "sidebar-tooltip-activity.md"), # TODO: new tooltip md
+        md_file_to_html("app", "text", "sidebar-tooltip-mechanism.md")
       ),
       choices = c(
         "De-adoption",
@@ -41,7 +41,7 @@ mod_select_strategy_ui <- function(id) {
       ns("strategy_select"),
       label = bslib::tooltip(
         trigger = list("Choose a TPMA", bsicons::bs_icon("info-circle")),
-        md_file_to_html("app", "text", "sidebar-tooltip-tpma.md"),
+        md_file_to_html("app", "text", "sidebar-tooltip-tpma.md")
       ),
       choices = NULL
     )
@@ -50,9 +50,8 @@ mod_select_strategy_ui <- function(id) {
 
 #' Prepare Table of Options for Dropdown Menus
 #'
-#' Reads the local mitigator-categories.csv and mitigators.json files. Extracts
-#' names and categories into a single lookup table that can be filtered to help
-#' decide what values to put in the dropdown menus.
+#' Reads the remote TPMA lookup. Builds a 'full' TPMA name for the
+#' TPMA-selection dropdown.
 #'
 #' @return A data.frame.
 #' @noRd
@@ -77,47 +76,73 @@ mod_select_strategy_get_strategies <- function() {
 #' @param id Internal parameter for `shiny`.
 #' @noRd
 mod_select_strategy_server <- function(id) {
-  # load static data items
   strategies_lookup <- mod_select_strategy_get_strategies()
 
-  # return the shiny module
   shiny::moduleServer(id, function(input, output, session) {
     strategies_filtered <- shiny::reactive({
-      shiny::req(input$strategy_activity_type_select)
-      shiny::req(input$strategy_mechanism_select)
+      # Checkbox-group handling is independent
+      activity_selected <- length(input$strategy_activity_type_select) > 0
+      mechanism_selected <- length(input$strategy_mechanism_select) > 0
 
-      strategies_lookup |>
-        dplyr::filter(
-          .data$activity_type %in% input$strategy_activity_type_select,
-          .data$tpma_mechanism %in% input$strategy_mechanism_select,
-        ) |>
-        dplyr::arrange(.data$tpma_code)
+      # Return empty data.frame (not NULL) to allow downstream handling
+      if (!activity_selected && !mechanism_selected) {
+        return(strategies_lookup[0, ])
+      }
+
+      if (activity_selected) {
+        strategies_lookup <- strategies_lookup |>
+          dplyr::filter(
+            .data$activity_type %in% input$strategy_activity_type_select
+          )
+      }
+      if (mechanism_selected) {
+        strategies_lookup <- strategies_lookup |>
+          dplyr::filter(
+            .data$tpma_mechanism %in% input$strategy_mechanism_select
+          )
+      }
+
+      strategies_lookup |> dplyr::arrange(.data$tpma_code)
     })
 
     shiny::observe({
-      strategy_choices <- strategies_filtered() |>
-        split(
-          # to get dropdown section labels like 'Inpatients: De-adoption'
-          list(
-            strategies_filtered()$activity_type,
-            strategies_filtered()$tpma_mechanism
-          ),
-          sep = ": "
-        ) |>
-        purrr::map(\(x) {
-          x |>
-            dplyr::select("tpma_name_full", "tpma_variable") |>
-            tibble::deframe()
-        })
+      choices_df <- strategies_filtered() # can be empty
 
-      strategy_choices <- strategy_choices[sort(names(strategy_choices))]
+      if (nrow(choices_df) == 0) {
+        # Providing a message means we must set a value. We set it as an empty
+        # string and must handle this in downstream modules.
+        shiny::updateSelectInput(
+          inputId = "strategy_select",
+          choices = c("No TPMAs available" = ""), # requires empty-string value
+          selected = ""
+        )
+        shinyjs::disable("strategy_select")
+      } else {
+        strategy_choices <- choices_df |>
+          split(
+            # To get dropdown section labels like 'Inpatients: De-adoption'
+            list(
+              choices_df$activity_type,
+              choices_df$tpma_mechanism
+            ),
+            sep = ": ",
+            drop = TRUE # remove non-viable permutations
+          ) |>
+          purrr::map(\(x) {
+            x |>
+              dplyr::select("tpma_name_full", "tpma_variable") |>
+              tibble::deframe()
+          })
 
-      shiny::updateSelectInput(
-        session,
-        "strategy_select",
-        choices = strategy_choices,
-        selected = NULL
-      )
+        strategy_choices <- strategy_choices[sort(names(strategy_choices))]
+
+        shiny::updateSelectInput(
+          inputId = "strategy_select",
+          choices = strategy_choices,
+          selected = strategy_choices[[1]][[1]] # explicitly select first available
+        )
+        shinyjs::enable("strategy_select")
+      }
     }) |>
       shiny::bindEvent(
         input$strategy_activity_type_select,
