@@ -1,7 +1,7 @@
 #' Validate Strategy Selection
 #' @param selected_strategy Reactive. Selected strategy variable name (or `NULL`).
 #' @return A data.frame.
-#' @noRD
+#' @noRd
 validate_strategy_selected <- function(selected_strategy) {
   shiny::validate(
     shiny::need(
