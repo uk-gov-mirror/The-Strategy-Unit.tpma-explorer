@@ -40,8 +40,8 @@ mod_show_strategy_text_server <- function(
       strategy <- shiny::req(selected_strategy())
 
       descriptions_lookup |>
-        dplyr::filter(tpma_variable == strategy) |>
-        dplyr::pull(tpma_description_name)
+        dplyr::filter(.data$tpma_variable == .env$strategy) |>
+        dplyr::pull(.data$tpma_description_name)
     })
 
     strategy_text <- shiny::reactive({
