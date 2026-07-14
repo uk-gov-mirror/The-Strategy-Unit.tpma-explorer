@@ -136,10 +136,28 @@ mod_select_strategy_server <- function(id) {
 
         strategy_choices <- strategy_choices[sort(names(strategy_choices))]
 
+        # Restore strategy value from bookmark, otherwise NULL
+        restored_value <- shiny::restoreInput(
+          id = session$ns("strategy_select"),
+          default = NULL
+        )
+
+        # To help check if the restored value is valid
+        valid_values <- unlist(strategy_choices, use.names = FALSE)
+
+        selected_value <- if (
+          !is.null(restored_value) &&
+            restored_value %in% valid_values
+        ) {
+          restored_value
+        } else {
+          strategy_choices[[1]][[1]] # explicitly select first available
+        }
+
         shiny::updateSelectInput(
           inputId = "strategy_select",
           choices = strategy_choices,
-          selected = strategy_choices[[1]][[1]] # explicitly select first available
+          selected = selected_value
         )
         shinyjs::enable("strategy_select")
       }

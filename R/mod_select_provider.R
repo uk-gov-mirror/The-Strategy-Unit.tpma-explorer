@@ -40,10 +40,26 @@ mod_select_provider_server <- function(id, selected_geography) {
       providers <- shiny::req(providers())
       provider_choices <- purrr::set_names(names(providers), providers)
 
+      # Restore strategy value from bookmark, otherwise NULL
+      restored_value <- shiny::restoreInput(
+        id = session$ns("provider_select"),
+        default = NULL
+      )
+
+      # To help check if the restored value is valid
+      valid_values <- unname(provider_choices)
+
+      selected_value <- if (!is.null(restored_value) && restored_value %in% valid_values) {
+        restored_value
+      } else {
+        provider_choices[[1]] # explicitly select first available
+      }
+
       shiny::updateSelectInput(
         session,
         "provider_select",
-        choices = provider_choices
+        choices = provider_choices,
+        selected = selected_value
       )
     })
 
