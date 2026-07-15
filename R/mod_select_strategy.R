@@ -56,9 +56,8 @@ mod_select_strategy_ui <- function(id) {
 #' @return A data.frame.
 #' @noRd
 mod_select_strategy_get_strategies <- function() {
-  # TODO: change path when merged to main
   readr::read_csv(
-    "https://raw.githubusercontent.com/The-Strategy-Unit/TPMAs/refs/heads/10-lookup-update/reference/tpma-lookup.csv",
+    "https://raw.githubusercontent.com/The-Strategy-Unit/TPMAs/refs/heads/main/reference/tpma-lookup.csv",
     col_types = "c"
   ) |>
     dplyr::filter(is.na(.data$active_to)) |>
