@@ -8,7 +8,7 @@ mod_select_geography_ui <- function(id) {
     ns("geography_select"),
     label = bslib::tooltip(
       trigger = list(
-        "Filter by geography",
+        "Choose a geography",
         bsicons::bs_icon("info-circle")
       ),
       md_file_to_html("app", "text", "sidebar-tooltip-geography.md"),
