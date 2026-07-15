@@ -35,7 +35,7 @@ mod_select_strategy_ui <- function(id) {
         "Prevention",
         "Redirection/Substitution"
       ),
-      selected = "Hospital Efficiency"
+      selected = "Redirection/Substitution"
     ),
     shiny::selectInput(
       ns("strategy_select"),

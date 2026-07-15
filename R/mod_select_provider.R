@@ -26,8 +26,8 @@ mod_select_provider_server <- function(id, selected_geography) {
     providers <- shiny::reactive({
       filename <- switch(
         selected_geography(),
-        "nhp" = "nhp-datasets.json",
-        "la" = "la-datasets.json"
+        "la" = "la-datasets.json",
+        "nhp" = "nhp-datasets.json"
       )
 
       shiny::req(filename)
@@ -52,7 +52,7 @@ mod_select_provider_server <- function(id, selected_geography) {
       selected_value <- if (!is.null(restored_value) && restored_value %in% valid_values) {
         restored_value
       } else {
-        provider_choices[[1]] # explicitly select first available
+        "E08000025" # Birmingham default, assumes default geography is "la"
       }
 
       shiny::updateSelectInput(
