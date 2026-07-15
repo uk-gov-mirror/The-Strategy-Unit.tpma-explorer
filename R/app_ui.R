@@ -44,15 +44,6 @@ app_ui <- function(request) {
       title = "Context",
       icon = bsicons::bs_icon("book"),
 
-      bslib::card(
-        bslib::card_header(
-          class = "text-bg-info",
-          bsicons::bs_icon("info-circle"),
-          "Note"
-        ),
-        "This app is in continuous development.",
-        "Please give feedback by clicking the link in the top-right."
-      ),
       bslib::layout_columns(
         col_widths = c(6, 6),
         bslib::card(
@@ -99,15 +90,6 @@ app_ui <- function(request) {
       title = "Visualisations",
       icon = bsicons::bs_icon("graph-up"),
 
-      bslib::card(
-        bslib::card_header(
-          class = "text-bg-info",
-          bsicons::bs_icon("info-circle"),
-          "Note"
-        ),
-        "This app is in continuous development.",
-        "Please give feedback by clicking the link in the top-right."
-      ),
       mod_show_strategy_text_ui("mod_show_strategy_text"),
       mod_plot_rates_ui("mod_plot_rates"),
       bslib::layout_columns(
@@ -126,16 +108,6 @@ app_ui <- function(request) {
       id = "nav_panel_info",
       title = "Information",
       icon = bsicons::bs_icon("info-circle"),
-
-      bslib::card(
-        bslib::card_header(
-          class = "text-bg-info",
-          bsicons::bs_icon("info-circle"),
-          "Note"
-        ),
-        "This app is in continuous development.",
-        "Please give feedback by clicking the link in the top-right."
-      ),
 
       bslib::layout_columns(
         col_widths = c(6, 6),
