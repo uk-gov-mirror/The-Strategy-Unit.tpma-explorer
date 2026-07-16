@@ -53,18 +53,6 @@
               <main class="bslib-page-main bslib-gap-spacing">
                 <div class="tab-content" data-tabsetid="X">
                   <div class="tab-pane active" data-value="Context" id="tab-X-1">
-                    <div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5">
-                      <div class="card-header bslib-gap-spacing text-bg-info">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-info-circle " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-      <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path></svg>
-                        Note
-                      </div>
-                      <div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">
-                        This app is in continuous development.
-                        Please give feedback by clicking the link in the top-right.
-                      </div>
-                      <script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
-                    </div>
                     <bslib-layout-columns class="bslib-grid grid bslib-mb-spacing html-fill-item" col-widths-sm="6,6" data-require-bs-caller="layout_columns()" data-require-bs-version="5">
                       <div class="bslib-grid-item bslib-gap-spacing html-fill-container">
                         <div class="card bslib-card bslib-mb-spacing bslib-card-input html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5" id="card_context_challenge">
@@ -184,18 +172,6 @@
                     </bslib-layout-columns>
                   </div>
                   <div class="tab-pane" data-value="Visualisations" id="tab-X-2">
-                    <div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5">
-                      <div class="card-header bslib-gap-spacing text-bg-info">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-info-circle " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-      <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path></svg>
-                        Note
-                      </div>
-                      <div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">
-                        This app is in continuous development.
-                        Please give feedback by clicking the link in the top-right.
-                      </div>
-                      <script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
-                    </div>
                     mod_show_strategy_text
                     mod_plot_rates
                     <bslib-layout-columns class="bslib-grid grid bslib-mb-spacing html-fill-item" col-widths-sm="6,6" data-require-bs-caller="layout_columns()" data-require-bs-version="5">
@@ -208,21 +184,20 @@
                     </bslib-layout-columns>
                   </div>
                   <div class="tab-pane" data-value="Information" id="tab-X-3">
-                    <div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5">
-                      <div class="card-header bslib-gap-spacing text-bg-info">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-info-circle " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-      <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path></svg>
-                        Note
-                      </div>
-                      <div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">
-                        This app is in continuous development.
-                        Please give feedback by clicking the link in the top-right.
-                      </div>
-                      <script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
-                    </div>
                     <bslib-layout-columns class="bslib-grid grid bslib-mb-spacing" col-widths-sm="6,6" data-require-bs-version="5" data-require-bs-caller="layout_columns()">
                       <div class="bslib-grid-item bslib-gap-spacing html-fill-container">
                         <bslib-layout-columns class="bslib-grid grid bslib-mb-spacing" col-widths-sm="12" data-require-bs-version="5" data-require-bs-caller="layout_columns()">
+                          <div class="bslib-grid-item bslib-gap-spacing html-fill-container">
+                            <div class="card bslib-card bslib-mb-spacing bslib-card-input html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5" id="card_info_suggestions">
+                              <div class="card-header bslib-gap-spacing">Suggestions</div>
+                              <div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;"><p>This app is in continuous development.
+      You can provide general feedback by clicking ‘Give feedback’ in the top-right.</p>
+      <p><a href="https://www.strategyunitwm.nhs.uk/">The Strategy Unit</a> has established a formal process to review, update, and maintain the set of TPMAs used in this app and <a href="https://www.strategyunitwm.nhs.uk/new-hospital-programme-demand-model">the New Hospital Programme Demand Model</a>.
+      If you have any thoughts about improving an existing TPMA or adding a new TPMA, then <a href="mailto:mlcsu.su.datascience@nhs.net?subject=Explore%20Opportunities%20to%20Reduce%20Hospital%20Care:%20TPMA%20suggestion">please get in touch</a> and we will feed your comments and ideas into this process.</p>
+      </div>
+                              <script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
+                            </div>
+                          </div>
                           <div class="bslib-grid-item bslib-gap-spacing html-fill-container">
                             <div class="card bslib-card bslib-mb-spacing bslib-card-input html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5" id="card_info_data">
                               <div class="card-header bslib-gap-spacing">Data</div>
@@ -249,18 +224,6 @@
       Note that there may be incomplete matches between datasets and peers given differences in the year they were derived.
       Peers for providers R0B and R0D were inherited from their predecessors.</p>
       </div>
-                              <script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
-                            </div>
-                          </div>
-                          <div class="bslib-grid-item bslib-gap-spacing html-fill-container">
-                            <div class="card bslib-card bslib-mb-spacing bslib-card-input html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5" id="card_info_author" style="display:inline;">
-                              <div class="card-header bslib-gap-spacing">Authors</div>
-                              <div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">
-                                <p>This app was built and is maintained by <a href="https://www.strategyunitwm.nhs.uk/">The Strategy Unit</a>.
-      The source code can be found in <a href="https://github.com/The-Strategy-Unit/tpma-explorer/">the open tpma-explorer GitHub repository</a>.</p>
-      
-                                Version 0.6.3.
-                              </div>
                               <script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
                             </div>
                           </div>
@@ -300,6 +263,18 @@
       <li><strong>toggle-section</strong> chevrons to collapse/expand sidebar sections and make more vertical space (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/></svg> in the upper-left of each sidebar section)</li>
       </ul>
       </div>
+                              <script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
+                            </div>
+                          </div>
+                          <div class="bslib-grid-item bslib-gap-spacing html-fill-container">
+                            <div class="card bslib-card bslib-mb-spacing bslib-card-input html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5" id="card_info_about">
+                              <div class="card-header bslib-gap-spacing">About the app</div>
+                              <div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">
+                                <p>This app was built and is maintained by <a href="https://www.strategyunitwm.nhs.uk/">The Strategy Unit</a>.
+      The source code can be found in <a href="https://github.com/The-Strategy-Unit/tpma-explorer/">the open tpma-explorer GitHub repository</a>.</p>
+      
+                                Version 0.6.3.
+                              </div>
                               <script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
                             </div>
                           </div>
