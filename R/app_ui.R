@@ -46,6 +46,8 @@ app_ui <- function(request) {
         title = "Context",
         icon = bsicons::bs_icon("book"),
 
+      bslib::layout_columns(
+        col_widths = c(6, 6),
         bslib::card(
           bslib::card_header(
             class = "text-bg-info",
@@ -101,15 +103,6 @@ app_ui <- function(request) {
         title = "Visualisations",
         icon = bsicons::bs_icon("graph-up"),
 
-        bslib::card(
-          bslib::card_header(
-            class = "text-bg-info",
-            bsicons::bs_icon("info-circle"),
-            "Note"
-          ),
-          "This app is in continuous development.",
-          "Please give feedback by clicking the link in the top-right."
-        ),
         mod_show_strategy_text_ui("mod_show_strategy_text"),
         mod_plot_rates_ui("mod_plot_rates"),
         bslib::layout_columns(
@@ -129,56 +122,49 @@ app_ui <- function(request) {
         title = "Information",
         icon = bsicons::bs_icon("info-circle"),
 
-        bslib::card(
-          bslib::card_header(
-            class = "text-bg-info",
-            bsicons::bs_icon("info-circle"),
-            "Note"
-          ),
-          "This app is in continuous development.",
-          "Please give feedback by clicking the link in the top-right."
-        ),
-
+      bslib::layout_columns(
+        col_widths = c(6, 6),
+        fill = FALSE,
         bslib::layout_columns(
           col_widths = c(6, 6),
           fill = FALSE,
-          bslib::layout_columns(
-            col_widths = 12,
-            fill = FALSE,
-            bslib::card(
-              id = "card_info_data",
-              bslib::card_header("Data"),
-              md_file_to_html("app", "text", "info-data.md")
-            ),
-            bslib::card(
-              id = "card_info_definitions",
-              bslib::card_header("Definitions"),
-              md_file_to_html("app", "text", "info-definitions.md")
-            ),
-            bslib::card(
-              id = "card_info_author",
-              bslib::card_header("Authors"),
-              style = "display:inline;", # put items on the same line
-              md_file_to_html("app", "text", "info-author.md"),
-              paste0(
-                "Version ",
-                as.character(utils::packageVersion(utils::packageName())),
-                "."
-              )
-            )
+          bslib::card(
+            id = "card_info_suggestions",
+            bslib::card_header("Suggestions"),
+            md_file_to_html("app", "text", "info-suggestions.md")
           ),
-          bslib::layout_columns(
-            col_widths = 12,
-            fill = FALSE,
-            bslib::card(
-              id = "card_info_navigation",
-              bslib::card_header("Navigation"),
-              md_file_to_html("app", "text", "info-navigation.md")
-            ),
-            bslib::card(
-              id = "card_info_interface",
-              bslib::card_header("Interface"),
-              md_file_to_html("app", "text", "info-interface.md")
+          bslib::card(
+            id = "card_info_data",
+            bslib::card_header("Data"),
+            md_file_to_html("app", "text", "info-data.md")
+          ),
+          bslib::card(
+            id = "card_info_definitions",
+            bslib::card_header("Definitions"),
+            md_file_to_html("app", "text", "info-definitions.md")
+          )
+        ),
+        bslib::layout_columns(
+          col_widths = 12,
+          fill = FALSE,
+          bslib::card(
+            id = "card_info_navigation",
+            bslib::card_header("Navigation"),
+            md_file_to_html("app", "text", "info-navigation.md")
+          ),
+          bslib::card(
+            id = "card_info_interface",
+            bslib::card_header("Interface"),
+            md_file_to_html("app", "text", "info-interface.md")
+          ),
+          bslib::card(
+            id = "card_info_about",
+            bslib::card_header("About the app"),
+            md_file_to_html("app", "text", "info-about.md"),
+            paste0(
+              "Version ",
+              as.character(utils::packageVersion(utils::packageName())),
+              "."
             )
           )
         )
