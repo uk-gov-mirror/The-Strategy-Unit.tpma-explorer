@@ -78,7 +78,7 @@
                       <div class="bslib-grid-item bslib-gap-spacing html-fill-container">
                         <div class="card bslib-card bslib-mb-spacing bslib-card-input html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5" id="card_context_tpmas">
                           <div class="card-header bslib-gap-spacing">Types of Potentially Mitigatable Activity (TPMAs)</div>
-                          <div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;"><p>Based upon detailed analysis, evidence and clinical engagement, <a href="https://www.strategyunitwm.nhs.uk/">The Strategy Unit</a> have identified 92 types of acute hospital activity have been identified as potentially mitigatable (i.e. could be reduced by deliberate action).
+                          <div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;"><p>Based upon detailed analysis, evidence and clinical engagement, <a href="https://www.strategyunitwm.nhs.uk/">The Strategy Unit</a> have identified 92 types of acute hospital activity which are potentially mitigatable (i.e. could be reduced by deliberate action).
       These are called Types of Potentially Mitgatable Activity (TPMAs).</p>
       <p>Some TPMAs focus on activity avoidance (i.e. avoiding inpatient admissions, or A&amp;E attendances) and some focus on efficiencies (i.e. reducing inpatient length of stay).</p>
       </div>
