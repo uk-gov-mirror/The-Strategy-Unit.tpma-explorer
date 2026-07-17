@@ -117,6 +117,7 @@ mod_plot_rates_server <- function(
       y_axis_limits,
       y_axis_title,
       y_labels,
+      selected_strategy,
       selected_year,
       base_size
     )
@@ -126,12 +127,14 @@ mod_plot_rates_server <- function(
       rates_funnel_calculations,
       y_axis_limits,
       funnel_x_title,
+      selected_strategy,
       base_size
     )
     mod_plot_rates_box_server(
       "mod_plot_rates_box",
       rates_funnel_data,
       y_axis_limits,
+      selected_strategy,
       base_size
     )
   })

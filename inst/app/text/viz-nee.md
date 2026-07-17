@@ -1,1 +1,1 @@
-Subject-matter experts were invited to provide national forecasts about future hospital activity (2039/40) in [an evidence-based elicitation exercise](https://doi.org/10.1136/bmjopen-2024-084632).
+Subject-matter experts were invited to provide national forecasts about future hospital activity (2039/40) from a 2019 baseline in [an evidence-based elicitation exercise](https://doi.org/10.1136/bmjopen-2024-084632).

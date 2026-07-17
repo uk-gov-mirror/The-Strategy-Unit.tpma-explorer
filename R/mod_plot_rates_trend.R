@@ -28,6 +28,7 @@ mod_plot_rates_trend_ui <- function(id) {
 #' @param y_axis_limits Numeric vector. Min and max values for the y axis.
 #' @param y_axis_title Character. Title for the y-axis.
 #' @param y_labels Function. Function to format y-axis labels.
+#' @param selected_strategy Reactive. Selected strategy variable name (or `NULL`).
 #' @param selected_year Reactive. Selected year in the form `202324`.
 #' @param base_size Numeric scalar. For scaling plot-element sizes.
 #' @noRd
@@ -37,11 +38,14 @@ mod_plot_rates_trend_server <- function(
   y_axis_limits,
   y_axis_title,
   y_labels,
+  selected_strategy,
   selected_year,
   base_size
 ) {
   shiny::moduleServer(id, function(input, output, session) {
     output$rates_trend_plot <- shiny::renderPlot({
+      validate_strategy_selected(selected_strategy())
+
       shiny::validate(
         shiny::need(
           nrow(rates()) > 0,

@@ -25,17 +25,28 @@ mod_plot_rates_box_ui <- function(id) {
 #' @param id Internal parameter for `shiny`.
 #' @param rates A data.frame. Annual rate values for combinations of provider
 #'     and strategy.
-#' @param base_size Numeric scalar. For scaling plot-element sizes.
 #' @param y_axis_limits Numeric vector. Min and max values for the y axis.
+#' @param selected_strategy Reactive. Selected strategy variable name (or `NULL`).
+#' @param base_size Numeric scalar. For scaling plot-element sizes.
 #' @noRd
-mod_plot_rates_box_server <- function(id, rates, y_axis_limits, base_size) {
+mod_plot_rates_box_server <- function(
+  id,
+  rates,
+  y_axis_limits,
+  selected_strategy,
+  base_size
+) {
   shiny::moduleServer(id, function(input, output, session) {
     output$rates_box_plot <- shiny::renderPlot({
+      validate_strategy_selected(selected_strategy())
+
       rates <- rates()
+
       shiny::validate(shiny::need(
         nrow(rates) > 0,
         "No data available for these selections."
       ))
+
       plot_rates_box(rates, y_axis_limits(), base_size)
     })
   })

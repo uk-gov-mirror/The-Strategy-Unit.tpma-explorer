@@ -49,27 +49,22 @@ mod_table_procedures_server <- function(
     procedures_prepared <- shiny::reactive({
       geography <- shiny::req(selected_geography())
       provider <- shiny::req(selected_provider())
-      strategy <- shiny::req(selected_strategy())
       year <- shiny::req(selected_year())
 
       prepare_procedures_data(
         procedures_lookup,
         geography,
         provider,
-        strategy,
+        selected_strategy(),
         year
       )
     })
 
     output$procedures_table <- gt::render_gt({
-      df <- procedures_prepared()
+      validate_strategy_selected(selected_strategy())
 
-      shiny::validate(
-        shiny::need(
-          !is.null(df) && nrow(df) > 0,
-          "No procedures to display."
-        )
-      )
+      df <- procedures_prepared()
+      shiny::validate(shiny::need(nrow(df) > 0, "No procedures to display."))
 
       entable_encounters(df)
     })

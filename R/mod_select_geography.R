@@ -3,19 +3,21 @@
 #' @noRd
 mod_select_geography_ui <- function(id) {
   ns <- shiny::NS(id)
-  shiny::selectInput(
+
+  shiny::radioButtons(
     ns("geography_select"),
     label = bslib::tooltip(
       trigger = list(
-        "Filter by geography",
+        "Choose a geography",
         bsicons::bs_icon("info-circle")
       ),
       md_file_to_html("app", "text", "sidebar-tooltip-geography.md"),
     ),
     choices = c(
-      "NHS provider trusts" = "nhp",
-      "Local authorities (LAs)" = "la"
-    )
+      "Local authorities (LAs)" = "la",
+      "NHS provider trusts" = "nhp"
+    ),
+    selected = "la" # default provider will be "E08000025" (Birmingham)
   )
 }
 

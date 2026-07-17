@@ -7,7 +7,6 @@ mod_plot_nee_ui <- function(id) {
     fill = FALSE,
     bslib::card_header("National Elicitation Exercise (NEE) estimate"),
     bslib::card_body(
-      md_file_to_html("app", "text", "viz-nee.md"),
       shinycssloaders::withSpinner(shiny::htmlOutput(ns("nee_text")))
     )
   )
@@ -28,21 +27,25 @@ mod_plot_nee_server <- function(id, selected_strategy) {
   # return the shiny module
   shiny::moduleServer(id, function(input, output, session) {
     selected_nee_data <- shiny::reactive({
-      strat <- shiny::req(selected_strategy())
-
       dplyr::filter(
         nee_data,
-        .data$param_name == strat
+        .data$param_name == selected_strategy()
       )
     })
 
     output$nee_text <- shiny::renderText({
+      validate_strategy_selected(selected_strategy())
+
       df <- selected_nee_data()
+      nee_intro <- md_file_to_html("app", "text", "viz-nee.md")
 
       if (nrow(df) == 0) {
-        "This TPMA was not part of that exercise. No estimate is available."
+        result <- paste(
+          "This TPMA was not part of that exercise.",
+          "<b>No estimate is available</b>."
+        )
       } else {
-        paste0(
+        result <- paste0(
           "They predicted that a mean of <b>",
           round(100 - df$mean),
           "%</b> of this type of activity could be mitigated, ",
@@ -53,6 +56,8 @@ mod_plot_nee_server <- function(id, selected_strategy) {
           "%</b>."
         )
       }
+
+      paste(nee_intro, result)
     })
   })
 }

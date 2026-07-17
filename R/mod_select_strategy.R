@@ -4,48 +4,44 @@
 mod_select_strategy_ui <- function(id) {
   ns <- shiny::NS(id)
   shiny::tagList(
-    shiny::checkboxInput(
-      ns("strategy_care_shift_checkbox"),
-      label = bslib::tooltip(
-        trigger = list(
-          "Filter for care-shift TPMAs",
-          bsicons::bs_icon("info-circle")
-        ),
-        md_file_to_html("app", "text", "sidebar-tooltip-careshift.md"),
-      ),
-      value = FALSE
-    ),
-    shiny::selectInput(
+    shiny::checkboxGroupInput(
       ns("strategy_activity_type_select"),
       label = bslib::tooltip(
         trigger = list(
-          "Filter by activity type",
+          "Filter TPMAs by activity type",
           bsicons::bs_icon("info-circle")
         ),
-        md_file_to_html("app", "text", "sidebar-tooltip-activity.md"),
+        md_file_to_html("app", "text", "sidebar-tooltip-activity.md")
       ),
       choices = c(
-        "Inpatients" = "ip",
-        "Outpatients" = "op",
-        "Accident & Emergency" = "ae"
-      )
+        "A&E",
+        "Inpatients",
+        "Outpatients"
+      ),
+      selected = "Inpatients"
     ),
-    shiny::selectInput(
-      ns("strategy_category_select"),
+    shiny::checkboxGroupInput(
+      ns("strategy_mechanism_select"),
       label = bslib::tooltip(
         trigger = list(
-          "Filter by TPMA category",
+          "Filter TPMAs by mechanism",
           bsicons::bs_icon("info-circle")
         ),
-        md_file_to_html("app", "text", "sidebar-tooltip-category.md"),
+        md_file_to_html("app", "text", "sidebar-tooltip-mechanism.md")
       ),
-      choices = NULL
+      choices = c(
+        "De-adoption",
+        "Hospital Efficiency",
+        "Prevention",
+        "Redirection/Substitution"
+      ),
+      selected = "Redirection/Substitution"
     ),
     shiny::selectInput(
       ns("strategy_select"),
       label = bslib::tooltip(
         trigger = list("Choose a TPMA", bsicons::bs_icon("info-circle")),
-        md_file_to_html("app", "text", "sidebar-tooltip-tpma.md"),
+        md_file_to_html("app", "text", "sidebar-tooltip-tpma.md")
       ),
       choices = NULL
     )
@@ -54,125 +50,134 @@ mod_select_strategy_ui <- function(id) {
 
 #' Prepare Table of Options for Dropdown Menus
 #'
-#' Reads the local mitigator-categories.csv and mitigators.json files. Extracts
-#' names and categories into a single lookup table that can be filtered to help
-#' decide what values to put in the dropdown menus.
+#' Reads the remote TPMA lookup. Builds a 'full' TPMA name for the
+#' TPMA-selection dropdown.
 #'
 #' @return A data.frame.
 #' @noRd
 mod_select_strategy_get_strategies <- function() {
-  # Read local lookups
-  categories <- app_sys("app", "reference", "mitigator-categories.csv") |>
-    readr::read_csv(
-      col_types = readr::cols(
-        .default = "c",
-        is_care_shift = readr::col_logical()
-      )
-    )
-  strategies <- app_sys("app", "reference", "mitigators.json") |>
-    yyjsonr::read_json_file()
-
-  strategies |>
-    unlist() |>
-    tibble::enframe("strategy", "strategy_name") |>
+  readr::read_csv(
+    "https://raw.githubusercontent.com/The-Strategy-Unit/TPMAs/refs/heads/main/reference/tpma-lookup.csv",
+    col_types = "c"
+  ) |>
+    dplyr::filter(is.na(.data$active_to)) |>
     dplyr::mutate(
-      activity_type = stringr::str_extract(
-        .data$strategy_name,
-        "(?<= \\()(IP|OP|AE)(?=-(AA|EF))" # e.g. 'IP' in 'IP-AA-001'
-      ) |>
-        stringr::str_to_lower(),
-      activity_type_name = dplyr::recode_values(
-        .data$activity_type,
-        "ip" ~ "Inpatients",
-        "op" ~ "Outpatients",
-        "ae" ~ "Accident & Emergency"
+      tpma_name_full = dplyr::if_else(
+        is.na(.data$tpma_subtype),
+        glue::glue("{tpma_code}: {tpma_name}"),
+        glue::glue("{tpma_code}: {tpma_name} ({tpma_subtype})")
       )
     ) |>
-    dplyr::left_join(categories, by = "strategy")
+    dplyr::relocate(.data$tpma_name_full, .after = .data$tpma_subtype)
 }
 
 #' Select Strategy Server
 #' @param id Internal parameter for `shiny`.
 #' @noRd
 mod_select_strategy_server <- function(id) {
-  # load static data items
   strategies_lookup <- mod_select_strategy_get_strategies()
 
-  # return the shiny module
   shiny::moduleServer(id, function(input, output, session) {
-    # A value to hold the bookmarked option if there's one being restored
-    pending_strategy <- shiny::reactiveVal(NULL) # does nothing if not restoring
-
     strategies_filtered <- shiny::reactive({
-      shiny::req(input$strategy_activity_type_select)
+      # Checkbox-group handling is independent
+      activity_selected <- length(input$strategy_activity_type_select) > 0
+      mechanism_selected <- length(input$strategy_mechanism_select) > 0
 
-      strategies_lookup |>
-        dplyr::filter(
-          .data$activity_type == input$strategy_activity_type_select,
-          .data$is_care_shift | !input$strategy_care_shift_checkbox
-        )
-    })
-
-    shiny::observe({
-      category_choices <- strategies_filtered() |>
-        dplyr::distinct(.data$category_name, .data$category) |>
-        tibble::deframe()
-
-      shiny::updateSelectInput(
-        session,
-        "strategy_category_select",
-        choices = category_choices
-      )
-    })
-
-    shiny::observe({
-      strategy_category <- shiny::req(input$strategy_category_select)
-
-      strategy_choices <- strategies_filtered() |>
-        dplyr::filter(.data$category == .env$strategy_category) |>
-        dplyr::select("strategy_name", "strategy") |>
-        tibble::deframe()
-
-      # A bookmark restore will have changed this reactiveVal to a strategy
-      # value, otherwise it remains NULL
-      selected_value <- pending_strategy()
-
-      if (!(selected_value %||% "") %in% strategy_choices) {
-        selected_value <- NULL
+      # Return empty data.frame (not NULL) to allow downstream handling
+      if (!activity_selected && !mechanism_selected) {
+        return(strategies_lookup[0, ])
       }
 
-      shiny::updateSelectInput(
-        session,
-        "strategy_select",
-        choices = strategy_choices,
-        selected = selected_value # if NULL, default to first available option
-      )
-    }) |>
-      shiny::bindEvent(input$strategy_category_select)
+      if (activity_selected) {
+        strategies_lookup <- strategies_lookup |>
+          dplyr::filter(
+            .data$activity_type %in% input$strategy_activity_type_select
+          )
+      }
+      if (mechanism_selected) {
+        strategies_lookup <- strategies_lookup |>
+          dplyr::filter(
+            .data$tpma_mechanism %in% input$strategy_mechanism_select
+          )
+      }
+
+      strategies_lookup |> dplyr::arrange(.data$tpma_code)
+    })
 
     shiny::observe({
-      pending_strategy(input$strategy_select)
+      choices_df <- strategies_filtered() # can be empty
+
+      if (nrow(choices_df) == 0) {
+        # Providing a message means we must set a value. We set it as an empty
+        # string and must handle this in downstream modules.
+        shiny::updateSelectInput(
+          inputId = "strategy_select",
+          choices = c("No TPMAs to show" = ""), # requires empty-string value
+          selected = ""
+        )
+        shinyjs::disable("strategy_select")
+      } else {
+        strategy_choices <- choices_df |>
+          split(
+            # To get dropdown section labels like 'Inpatients: De-adoption'
+            list(
+              choices_df$activity_type,
+              choices_df$tpma_mechanism
+            ),
+            sep = ": ",
+            drop = TRUE # remove non-viable permutations
+          ) |>
+          purrr::map(\(x) {
+            x |>
+              dplyr::select("tpma_name_full", "tpma_variable") |>
+              tibble::deframe()
+          })
+
+        strategy_choices <- strategy_choices[sort(names(strategy_choices))]
+
+        # Restore strategy value from bookmark, otherwise NULL
+        restored_value <- shiny::restoreInput(
+          id = session$ns("strategy_select"),
+          default = NULL
+        )
+
+        # To help check if the restored value is valid
+        valid_values <- unlist(strategy_choices, use.names = FALSE)
+
+        selected_value <- if (
+          !is.null(restored_value) &&
+            restored_value %in% valid_values
+        ) {
+          restored_value
+        } else {
+          strategy_choices[[1]][[1]] # explicitly select first available
+        }
+
+        shiny::updateSelectInput(
+          inputId = "strategy_select",
+          choices = strategy_choices,
+          selected = selected_value
+        )
+        shinyjs::enable("strategy_select")
+      }
     }) |>
-      shiny::bindEvent(input$strategy_select)
-
-    # handle the onRestored event for bookmarking
-    # cannot directly test onRestored, so separate into a function which can be
-    # tested.
-    restore <- function(state) {
-      # Store the bookmarked value. The category dropdown will be updated below,
-      # which will then result in the restored strategy being selected.
-      pending_strategy(state$input$strategy_select)
-
-      shiny::updateSelectInput(
-        session,
-        "strategy_category_select",
-        selected = state$input$strategy_category_select
+      shiny::bindEvent(
+        input$strategy_activity_type_select,
+        input$strategy_mechanism_select
       )
 
-      invisible(NULL)
-    }
-    shiny::onRestored(restore)
+    selected_strategy <- shiny::reactive({
+      # Depend on the filtered strategies as well as the select input
+      choices_df <- strategies_filtered()
 
-    shiny::reactive(input$strategy_select)
+      # If there are no valid TPMAs, there is no selected strategy
+      if (nrow(choices_df) == 0) {
+        return(NULL)
+      }
+
+      input$strategy_select
+    })
+
+    selected_strategy
   })
 }

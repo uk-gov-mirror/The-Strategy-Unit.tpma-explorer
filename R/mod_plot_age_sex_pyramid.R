@@ -43,13 +43,14 @@ mod_plot_age_sex_pyramid_server <- function(
     age_sex_data <- shiny::reactive({
       geography <- shiny::req(selected_geography())
       provider <- shiny::req(selected_provider())
-      strategy <- shiny::req(selected_strategy())
       year <- shiny::req(selected_year())
 
-      prepare_age_sex_data(geography, provider, strategy, year)
+      prepare_age_sex_data(geography, provider, selected_strategy(), year)
     })
 
     output$age_sex_pyramid <- shiny::renderPlot({
+      validate_strategy_selected(selected_strategy())
+
       df <- shiny::req(age_sex_data())
 
       shiny::validate(shiny::need(
