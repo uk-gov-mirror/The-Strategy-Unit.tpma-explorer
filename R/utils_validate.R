@@ -6,7 +6,7 @@ validate_strategy_selected <- function(selected_strategy) {
   shiny::validate(
     shiny::need(
       !is.null(selected_strategy),
-      "Choose a TPMA"
+      "Choose a TPMA from the sidebar"
     )
   )
 }

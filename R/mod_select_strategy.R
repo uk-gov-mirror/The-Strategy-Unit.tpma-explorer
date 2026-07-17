@@ -8,7 +8,7 @@ mod_select_strategy_ui <- function(id) {
       ns("strategy_activity_type_select"),
       label = bslib::tooltip(
         trigger = list(
-          "Filter by activity type",
+          "Filter TPMAs by activity type",
           bsicons::bs_icon("info-circle")
         ),
         md_file_to_html("app", "text", "sidebar-tooltip-activity.md")
@@ -24,7 +24,7 @@ mod_select_strategy_ui <- function(id) {
       ns("strategy_mechanism_select"),
       label = bslib::tooltip(
         trigger = list(
-          "Filter by mechanism",
+          "Filter TPMAs by mechanism",
           bsicons::bs_icon("info-circle")
         ),
         md_file_to_html("app", "text", "sidebar-tooltip-mechanism.md")
