@@ -38,6 +38,8 @@ mod_select_provider_server <- function(id, selected_geography) {
 
     shiny::observe({
       providers <- shiny::req(providers())
+      geography <- shiny::req(selected_geography())
+
       provider_choices <- purrr::set_names(names(providers), providers)
 
       # Restore strategy value from bookmark, otherwise NULL
@@ -52,7 +54,12 @@ mod_select_provider_server <- function(id, selected_geography) {
       selected_value <- if (!is.null(restored_value) && restored_value %in% valid_values) {
         restored_value
       } else {
-        "E08000025" # Birmingham default, assumes default geography is "la"
+        # Set a sensible default if not restored from a bookmark
+        if (geography == "la") {
+          "E08000025" # Birmingham
+        } else if (geography == "nhp") {
+          "RRK" # University Hospitals Birmingham NHS Foundation Trust
+        }
       }
 
       shiny::updateSelectInput(
