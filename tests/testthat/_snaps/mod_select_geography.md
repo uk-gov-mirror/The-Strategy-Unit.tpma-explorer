@@ -6,7 +6,7 @@
       <div id="test-geography_select" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="test-geography_select-label">
         <label class="control-label" id="test-geography_select-label" for="test-geography_select">
           <bslib-tooltip placement="auto" bsOptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
-            <template><p>The geography within which to select a statistical unit.
+            <template><p>Filter statistical units by higher-level geography.
       Note: you can widen this sidebar or collapse sections.</p>
       </template>
             Choose a geography
