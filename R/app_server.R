@@ -5,6 +5,9 @@ app_server <- function(input, output, session) {
   # Constants ----
   BASE_SIZE <- 16 # scaling for plot elements
 
+  # Data ----
+  tpma_lookup <- fetch_tpma_lookup()
+
   # User inputs ----
   selected_geography <- mod_select_geography_server(
     "mod_select_geography"
@@ -14,7 +17,8 @@ app_server <- function(input, output, session) {
     selected_geography
   )
   selected_strategy <- mod_select_strategy_server(
-    "mod_select_strategy"
+    "mod_select_strategy",
+    tpma_lookup
   )
   selected_year <- shiny::reactive({
     as.numeric(Sys.getenv("BASELINE_YEAR", 202324))
@@ -40,6 +44,10 @@ app_server <- function(input, output, session) {
   })
 
   # Modules ----
+  mod_overview_server(
+    "mod_overview",
+    tpma_lookup
+  )
   mod_show_strategy_text_server(
     "mod_show_strategy_text",
     selected_strategy

@@ -48,35 +48,11 @@ mod_select_strategy_ui <- function(id) {
   )
 }
 
-#' Prepare Table of Options for Dropdown Menus
-#'
-#' Reads the remote TPMA lookup. Builds a 'full' TPMA name for the
-#' TPMA-selection dropdown.
-#'
-#' @return A data.frame.
-#' @noRd
-mod_select_strategy_get_strategies <- function() {
-  readr::read_csv(
-    "https://raw.githubusercontent.com/The-Strategy-Unit/TPMAs/refs/heads/main/reference/tpma-lookup.csv",
-    col_types = "c"
-  ) |>
-    dplyr::filter(is.na(.data$active_to)) |>
-    dplyr::mutate(
-      tpma_name_full = dplyr::if_else(
-        is.na(.data$tpma_subtype),
-        glue::glue("{tpma_code}: {tpma_name}"),
-        glue::glue("{tpma_code}: {tpma_name} ({tpma_subtype})")
-      )
-    ) |>
-    dplyr::relocate(.data$tpma_name_full, .after = .data$tpma_subtype)
-}
-
 #' Select Strategy Server
 #' @param id Internal parameter for `shiny`.
+#' @param tpma_lookup IData.frame. TPMA lookup read from GitHub.
 #' @noRd
-mod_select_strategy_server <- function(id) {
-  strategies_lookup <- mod_select_strategy_get_strategies()
-
+mod_select_strategy_server <- function(id, tpma_lookup) {
   shiny::moduleServer(id, function(input, output, session) {
     strategies_filtered <- shiny::reactive({
       # Checkbox-group handling is independent
@@ -85,23 +61,23 @@ mod_select_strategy_server <- function(id) {
 
       # Return empty data.frame (not NULL) to allow downstream handling
       if (!activity_selected && !mechanism_selected) {
-        return(strategies_lookup[0, ])
+        return(tpma_lookup[0, ])
       }
 
       if (activity_selected) {
-        strategies_lookup <- strategies_lookup |>
+        tpma_lookup <- tpma_lookup |>
           dplyr::filter(
             .data$activity_type %in% input$strategy_activity_type_select
           )
       }
       if (mechanism_selected) {
-        strategies_lookup <- strategies_lookup |>
+        tpma_lookup <- tpma_lookup |>
           dplyr::filter(
             .data$tpma_mechanism %in% input$strategy_mechanism_select
           )
       }
 
-      strategies_lookup |> dplyr::arrange(.data$tpma_code)
+      tpma_lookup |> dplyr::arrange(.data$tpma_code)
     })
 
     shiny::observe({
