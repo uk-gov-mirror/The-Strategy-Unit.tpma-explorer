@@ -50,7 +50,7 @@ mod_select_strategy_ui <- function(id) {
 
 #' Select Strategy Server
 #' @param id Internal parameter for `shiny`.
-#' @param tpma_lookup IData.frame. TPMA lookup read from GitHub.
+#' @param tpma_lookup Data.frame. TPMA lookup read from GitHub.
 #' @noRd
 mod_select_strategy_server <- function(id, tpma_lookup) {
   shiny::moduleServer(id, function(input, output, session) {

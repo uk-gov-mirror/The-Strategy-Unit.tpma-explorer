@@ -21,7 +21,7 @@ mod_overview_ui <- function(id) {
 
 #' Overview Page Server
 #' @param id Internal parameter for `shiny`.
-#' @param tpma_lookup IData.frame. TPMA lookup read from GitHub.
+#' @param tpma_lookup Data.frame. TPMA lookup read from GitHub.
 #' @noRd
 mod_overview_server <- function(id, tpma_lookup) {
   tpma_lookup <- tpma_lookup |>
