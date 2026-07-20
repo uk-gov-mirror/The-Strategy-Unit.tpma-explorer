@@ -7,8 +7,8 @@ app_ui <- function(request) {
     bslib::page_navbar(
       id = "page_navbar",
       title = "Explore opportunities to reduce hospital care",
-      selected = "Context", # start with this panel open
-      fillable = FALSE, # allow page scroll
+      selected = "Visualisations", # start with this panel open
+      fillable = FALSE, # scrollable pages (i.e. don't fit cards to window extent)
 
       sidebar = bslib::sidebar(
         id = "sidebar",
@@ -39,6 +39,13 @@ app_ui <- function(request) {
             )
           )
         )
+      ),
+
+      bslib::nav_panel(
+        id = "nav_panel_overview",
+        title = "Overview",
+        icon = bsicons::bs_icon("grid"),
+        mod_overview_ui("mod_overview")
       ),
 
       bslib::nav_panel(

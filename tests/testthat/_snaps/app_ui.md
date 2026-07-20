@@ -17,20 +17,26 @@
             </div>
             <div class="navbar-collapse collapse" id="navbar-collapse-X">
               <ul class="nav navbar-nav nav-underline shiny-tab-input" id="page_navbar" data-tabsetid="X">
-                <li class="active">
-                  <a href="#tab-X-1" data-toggle="tab" data-bs-toggle="tab" data-value="Context">
+                <li>
+                  <a href="#tab-X-1" data-toggle="tab" data-bs-toggle="tab" data-value="Overview">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-grid " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"></path></svg>
+                    Overview
+                  </a>
+                </li>
+                <li>
+                  <a href="#tab-X-2" data-toggle="tab" data-bs-toggle="tab" data-value="Context">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-book " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"></path></svg>
                     Context
                   </a>
                 </li>
-                <li>
-                  <a href="#tab-X-2" data-toggle="tab" data-bs-toggle="tab" data-value="Visualisations">
+                <li class="active">
+                  <a href="#tab-X-3" data-toggle="tab" data-bs-toggle="tab" data-value="Visualisations">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-graph-up " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"></path></svg>
                     Visualisations
                   </a>
                 </li>
                 <li>
-                  <a href="#tab-X-3" data-toggle="tab" data-bs-toggle="tab" data-value="Information">
+                  <a href="#tab-X-4" data-toggle="tab" data-bs-toggle="tab" data-value="Information">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-info-circle " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
       <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path></svg>
                     Information
@@ -52,7 +58,43 @@
             <div class="main">
               <main class="bslib-page-main bslib-gap-spacing">
                 <div class="tab-content" data-tabsetid="X">
-                  <div class="tab-pane active" data-value="Context" id="tab-X-1">
+                  <div class="tab-pane" data-value="Overview" id="tab-X-1">
+                    <bslib-layout-columns class="bslib-grid grid bslib-mb-spacing html-fill-item" col-widths-sm="3,9" data-require-bs-caller="layout_columns()" data-require-bs-version="5">
+                      <div class="bslib-grid-item bslib-gap-spacing html-fill-container">
+                        <div class="card bslib-card bslib-mb-spacing bslib-card-input html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5" id="card_overview_intro">
+                          <div class="card-header bslib-gap-spacing">Purpose</div>
+                          <div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;"><p>The Government’s <a href="https://www.gov.uk/government/publications/10-year-health-plan-for-england-fit-for-the-future">10-Year Plan for Health</a> sets an ambition to reduce reliance on hospitals and deliver care closer to where people live. But which forms of hospital care might be avoided or transferred into community settings? And how much hospital activity can be avoided?</p>
+      <p>By reviewing the evidence, talking to clinicians, and analysing data, we have identified 34 <strong>Types of Potentially-Mitigatable Activity</strong> (TPMAs).</p>
+      <p>These include care delivered in inpatient wards <span class="badge rounded-pill" style="background-color:#330072;color:white;">IP</span>, outpatient clinics <span class="badge rounded-pill" style="background-color:#00A499;color:white;">OP</span> and accident and emergency departments <span class="badge rounded-pill" style="background-color:#ED8B00;color:white;">A&amp;E</span>.</p>
+      <p>This activity can be mitigated through four <strong>mechanisms</strong>: prevention, de-adoption, redirection/substitution and hospital efficiency.</p>
+      <p>This tool allows you to explore these TPMAs: to see the level of these activities in your area or hospital, or examine trends and geographical variation.</p>
+      <p>This app is in continuous development. Please give feedback by clicking the link in the top-right.</p>
+      </div>
+                          <script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
+                        </div>
+                      </div>
+                      <div class="bslib-grid-item bslib-gap-spacing html-fill-container">
+                        <div class="card bslib-card bslib-mb-spacing bslib-card-input html-fill-item html-fill-container" data-bslib-card-init data-full-screen="false" data-require-bs-caller="card()" data-require-bs-version="5" id="card_overview_matrix">
+                          <div class="card-header bslib-gap-spacing">Types of Potentially-Mitigatable Activity (TPMAs) by mechanism</div>
+                          <div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">
+                            <div data-spinner-id="spinner-0dc29c636cf431f32881e6db5be4aa8a" class="shiny-spinner-output-container shiny-spinner-hideui">
+                              <div class="load-container shiny-spinner-hidden load1">
+                                <div id="spinner-0dc29c636cf431f32881e6db5be4aa8a" class="loader">Loading...</div>
+                              </div>
+                              <div style="height:400px" class="shiny-spinner-placeholder"></div>
+                              <div id="mod_overview-overview_matrix" class="shiny-html-output"></div>
+                            </div>
+                          </div>
+                          <bslib-tooltip placement="auto" bsOptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+                            <template>Expand</template>
+                            <button aria-expanded="false" aria-label="Expand card" class="bslib-full-screen-enter badge rounded-pill"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"/></svg></button>
+                          </bslib-tooltip>
+                          <script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
+                        </div>
+                      </div>
+                    </bslib-layout-columns>
+                  </div>
+                  <div class="tab-pane" data-value="Context" id="tab-X-2">
                     <bslib-layout-columns class="bslib-grid grid bslib-mb-spacing html-fill-item" col-widths-sm="6,6" data-require-bs-caller="layout_columns()" data-require-bs-version="5">
                       <div class="bslib-grid-item bslib-gap-spacing html-fill-container">
                         <div class="card bslib-card bslib-mb-spacing bslib-card-input html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5" id="card_context_challenge">
@@ -171,7 +213,7 @@
                       </div>
                     </bslib-layout-columns>
                   </div>
-                  <div class="tab-pane" data-value="Visualisations" id="tab-X-2">
+                  <div class="tab-pane active" data-value="Visualisations" id="tab-X-3">
                     mod_show_strategy_text
                     mod_plot_rates
                     <bslib-layout-columns class="bslib-grid grid bslib-mb-spacing html-fill-item" col-widths-sm="6,6" data-require-bs-caller="layout_columns()" data-require-bs-version="5">
@@ -183,7 +225,7 @@
                       <div class="bslib-grid-item bslib-gap-spacing html-fill-container">mod_plot_nee</div>
                     </bslib-layout-columns>
                   </div>
-                  <div class="tab-pane" data-value="Information" id="tab-X-3">
+                  <div class="tab-pane" data-value="Information" id="tab-X-4">
                     <bslib-layout-columns class="bslib-grid grid bslib-mb-spacing" col-widths-sm="6,6" data-require-bs-version="5" data-require-bs-caller="layout_columns()">
                       <div class="bslib-grid-item bslib-gap-spacing html-fill-container">
                         <bslib-layout-columns class="bslib-grid grid bslib-mb-spacing" col-widths-sm="12" data-require-bs-version="5" data-require-bs-caller="layout_columns()">
