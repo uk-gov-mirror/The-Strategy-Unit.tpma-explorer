@@ -25,7 +25,19 @@ mod_overview_ui <- function(id) {
 #' @noRd
 mod_overview_server <- function(id, tpma_lookup) {
   tpma_lookup <- tpma_lookup |>
-    dplyr::distinct(.data$tpma_name, .data$activity_type, .data$tpma_mechanism)
+    dplyr::distinct(
+      .data$tpma_name, # we're only showing the names, not the subtypes
+      .data$activity_type,
+      .data$tpma_mechanism
+    ) |>
+    dplyr::mutate(
+      activity_type = dplyr::replace_values(
+        .data$activity_type,
+        # Takes up less space in the cards
+        "Inpatients" ~ "IP",
+        "Outpatients" ~ "OP"
+      )
+    )
 
   type_palette <- c(
     # Matches what's in inst/app/text/overview-about.md
@@ -65,15 +77,20 @@ mod_overview_server <- function(id, tpma_lookup) {
               )
 
               bslib::card(
+                class = "mb-0",
                 full_screen = FALSE,
                 bslib::card_body(
-                  gap = 10, # between pill and body text
-                  shiny::span(
-                    class = "badge rounded-pill align-self-start", # pill wide as text
-                    style = badge_style,
-                    activity_type
-                  ),
-                  shiny::div(tpma_name)
+                  padding = "0.4rem", # tighter padding within card
+                  shiny::div(
+                    class = "d-flex justify-content-between align-items-start", # text/pill side-by-side
+                    style = "gap: 5px;", # between text and pill
+                    shiny::div(tpma_name),
+                    shiny::span(
+                      class = "badge rounded-pill flex-shrink-0", # pill stays sized to text
+                      style = badge_style,
+                      activity_type
+                    )
+                  )
                 )
               )
             })
@@ -81,7 +98,7 @@ mod_overview_server <- function(id, tpma_lookup) {
           # Mechanism header card, with a count of how many TPMAs fall
           # under it, stacked above its TPMA cards.
           shiny::div(
-            class = "d-flex flex-column",
+            class = "d-flex flex-column gap-1", # vertical card gap
             bslib::card(
               class = "bg-light fw-bold text-center",
               bslib::card_body(
