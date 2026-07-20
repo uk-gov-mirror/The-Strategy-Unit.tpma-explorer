@@ -39,11 +39,20 @@ mod_overview_server <- function(id, tpma_lookup) {
       )
     )
 
+  # Used in the mechanism header columns
+  mechanism_descriptions <- c(
+    "De-adoption" = "Stop providing treatments that are unlikely to benefit patients",
+    "Hospital Efficiency" = "Improve the way we deliver care in hospital to reduce the time that patients spend there",
+    "Prevention" = "Act upstream to improve people's health and manage their health risks",
+    "Redirection/Substitution" = "Deliver care in the same or a different form in the community"
+  )
+
+  # Used to colour activity-type pills in each TPM< card
   type_palette <- c(
     # Matches what's in inst/app/text/overview-about.md
-    "#330072", # NHS purple (A&E)
-    "#00A499", # NHS aqua green (Inpatients)
-    "#ED8B00" # NHS orange (Outpatients)
+    "#ED8B00", # NHS orange (A&E)
+    "#330072", # NHS purple (Inpatients)
+    "#00A499" # NHS aqua green (Outpatients)
   )
 
   shiny::moduleServer(id, function(input, output, session) {
@@ -67,8 +76,7 @@ mod_overview_server <- function(id, tpma_lookup) {
           rows_in_mechanism <- tpma_lookup |>
             dplyr::filter(.data$tpma_mechanism == mechanism)
 
-          # One card per TPMA in this mechanism: a small coloured pill
-          # identifies the activity_type, tpma_name follows below it.
+          # One card per TPMA (shows name and coloured activity-type pill)
           tpma_cards <- rows_in_mechanism |>
             purrr::pmap(\(tpma_name, activity_type, tpma_mechanism) {
               col <- type_colours[[activity_type]]
@@ -83,7 +91,6 @@ mod_overview_server <- function(id, tpma_lookup) {
                   padding = "0.4rem", # tighter padding within card
                   shiny::div(
                     class = "d-flex justify-content-between align-items-start", # text/pill side-by-side
-                    style = "gap: 5px;", # between text and pill
                     shiny::div(tpma_name),
                     shiny::span(
                       class = "badge rounded-pill flex-shrink-0", # pill stays sized to text
@@ -95,14 +102,20 @@ mod_overview_server <- function(id, tpma_lookup) {
               )
             })
 
-          # Mechanism header card, with a count of how many TPMAs fall
-          # under it, stacked above its TPMA cards.
+          # Mechanism column-header card: bold name/count with a description
           shiny::div(
             class = "d-flex flex-column gap-1", # vertical card gap
             bslib::card(
-              class = "bg-light fw-bold text-center",
+              class = "bg-light", # text-center to centre
               bslib::card_body(
-                glue::glue("{mechanism} ({nrow(rows_in_mechanism)})")
+                shiny::div(
+                  class = "fw-bold",
+                  glue::glue("{mechanism} ({nrow(rows_in_mechanism)})")
+                ),
+                shiny::div(
+                  class = "small",
+                  mechanism_descriptions[[mechanism]]
+                )
               )
             ),
             tpma_cards
