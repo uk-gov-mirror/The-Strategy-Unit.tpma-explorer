@@ -10,37 +10,6 @@ app_ui <- function(request) {
       selected = "Visualisations", # start with this panel open
       fillable = FALSE, # scrollable pages (i.e. don't fit cards to window extent)
 
-      sidebar = bslib::sidebar(
-        id = "sidebar",
-        open = "closed",
-        width = 400,
-        bslib::accordion(
-          id = "sidebar_accordion",
-          open = FALSE,
-          multiple = TRUE,
-          bslib::accordion_panel(
-            title = "Datasets",
-            icon = bsicons::bs_icon("table"),
-            mod_select_geography_ui("mod_select_geography"),
-            mod_select_provider_ui("mod_select_provider")
-          ),
-          bslib::accordion_panel(
-            title = "Types of Potentially-Mitigatable Activity (TPMAs)",
-            icon = bsicons::bs_icon("hospital"),
-            mod_select_strategy_ui("mod_select_strategy")
-          ),
-          bslib::accordion_panel(
-            title = "Bookmark",
-            icon = bsicons::bs_icon("bookmark"),
-            shiny::bookmarkButton(
-              label = "Generate shareable URL",
-              title = "Bookmark your selections and get a URL for sharing",
-              icon = NULL
-            )
-          )
-        )
-      ),
-
       bslib::nav_panel(
         id = "nav_panel_overview",
         title = "Overview",
@@ -99,17 +68,49 @@ app_ui <- function(request) {
         title = "Visualisations",
         icon = bsicons::bs_icon("graph-up"),
 
-        mod_show_strategy_text_ui("mod_show_strategy_text"),
-        mod_plot_rates_ui("mod_plot_rates"),
-        bslib::layout_columns(
-          col_widths = c(6, 6),
-          mod_table_diagnoses_ui("mod_table_diagnoses"),
-          mod_table_procedures_ui("mod_table_procedures")
-        ),
-        bslib::layout_columns(
-          col_widths = c(6, 6),
-          mod_plot_age_sex_pyramid_ui("mod_plot_age_sex_pyramid"),
-          mod_plot_nee_ui("mod_plot_nee")
+        bslib::layout_sidebar(
+          sidebar = bslib::sidebar(
+            id = "sidebar",
+            open = "open", # no longer needs to be toggled -- it only exists here
+            width = 400,
+            bslib::accordion(
+              id = "sidebar_accordion",
+              open = FALSE,
+              multiple = TRUE,
+              bslib::accordion_panel(
+                title = "Datasets",
+                icon = bsicons::bs_icon("table"),
+                mod_select_geography_ui("mod_select_geography"),
+                mod_select_provider_ui("mod_select_provider")
+              ),
+              bslib::accordion_panel(
+                title = "Types of Potentially-Mitigatable Activity (TPMAs)",
+                icon = bsicons::bs_icon("hospital"),
+                mod_select_strategy_ui("mod_select_strategy")
+              ),
+              bslib::accordion_panel(
+                title = "Bookmark",
+                icon = bsicons::bs_icon("bookmark"),
+                shiny::bookmarkButton(
+                  label = "Generate shareable URL",
+                  title = "Bookmark your selections and get a URL for sharing",
+                  icon = NULL
+                )
+              )
+            )
+          ),
+          mod_show_strategy_text_ui("mod_show_strategy_text"),
+          mod_plot_rates_ui("mod_plot_rates"),
+          bslib::layout_columns(
+            col_widths = c(6, 6),
+            mod_table_diagnoses_ui("mod_table_diagnoses"),
+            mod_table_procedures_ui("mod_table_procedures")
+          ),
+          bslib::layout_columns(
+            col_widths = c(6, 6),
+            mod_plot_age_sex_pyramid_ui("mod_plot_age_sex_pyramid"),
+            mod_plot_nee_ui("mod_plot_nee")
+          )
         )
       ),
 
