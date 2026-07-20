@@ -31,6 +31,16 @@ mod_overview_server <- function(id, tpma_lookup) {
       .data$tpma_mechanism
     ) |>
     dplyr::mutate(
+      tpma_mechanism = factor(
+        tpma_mechanism,
+        levels = c(
+          # 'Logical' ordering rather than alpha
+          "Prevention",
+          "De-adoption",
+          "Redirection/Substitution",
+          "Hospital Efficiency"
+        )
+      ),
       activity_type = dplyr::replace_values(
         .data$activity_type,
         # Takes up less space in the cards
@@ -41,10 +51,10 @@ mod_overview_server <- function(id, tpma_lookup) {
 
   # Used in the mechanism header columns
   mechanism_descriptions <- c(
-    "De-adoption" = "Stop providing treatments that are unlikely to benefit patients",
-    "Hospital Efficiency" = "Improve the way we deliver care in hospital to reduce the time that patients spend there",
     "Prevention" = "Act upstream to improve people's health and manage their health risks",
-    "Redirection/Substitution" = "Deliver care in the same or a different form in the community"
+    "De-adoption" = "Stop providing treatments that are unlikely to benefit patients",
+    "Redirection/Substitution" = "Deliver care in the same or a different form in the community",
+    "Hospital Efficiency" = "Improve the way we deliver care in hospital to reduce the time that patients spend there"
   )
 
   # Used to colour activity-type pills in each TPM< card
@@ -58,9 +68,9 @@ mod_overview_server <- function(id, tpma_lookup) {
   shiny::moduleServer(id, function(input, output, session) {
     output$overview_matrix <- shiny::renderUI({
       mechanisms <- tpma_lookup |>
+        dplyr::arrange(.data$tpma_mechanism) |>
         dplyr::pull(.data$tpma_mechanism) |>
-        unique() |>
-        sort()
+        unique()
 
       activity_types <- tpma_lookup |>
         dplyr::pull(.data$activity_type) |>
