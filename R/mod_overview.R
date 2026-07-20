@@ -90,7 +90,7 @@ mod_overview_server <- function(id, tpma_lookup) {
                 bslib::card_body(
                   padding = "0.4rem", # tighter padding within card
                   shiny::div(
-                    class = "d-flex justify-content-between align-items-start", # text/pill side-by-side
+                    class = "d-flex justify-content-between align-items-start gap-3", # text/pill side-by-side
                     shiny::div(tpma_name),
                     shiny::span(
                       class = "badge rounded-pill flex-shrink-0", # pill stays sized to text
