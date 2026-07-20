@@ -32,7 +32,7 @@ mod_overview_server <- function(id, tpma_lookup) {
     ) |>
     dplyr::mutate(
       tpma_mechanism = factor(
-        tpma_mechanism,
+        .data$tpma_mechanism,
         levels = c(
           # 'Logical' ordering rather than alpha
           "Prevention",
