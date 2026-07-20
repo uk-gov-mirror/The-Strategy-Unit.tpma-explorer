@@ -8,7 +8,7 @@ app_ui <- function(request) {
       id = "page_navbar",
       title = "Explore opportunities to reduce hospital care",
       selected = "Visualisations", # start with this panel open
-      fillable = "Overview", # cards fit to panel and are scrollable here
+      fillable = FALSE, # scrollable pages (i.e. don't fit cards to window extent)
 
       sidebar = bslib::sidebar(
         id = "sidebar",
