@@ -24,17 +24,6 @@ app_server <- function(input, output, session) {
     as.numeric(Sys.getenv("BASELINE_YEAR", 202324))
   })
 
-  # Open sidebar ---
-  shiny::observe({
-    if (input$page_navbar == "Visualisations") {
-      # Sidebar options only relevant to visualisations
-      bslib::toggle_sidebar("sidebar", open = TRUE)
-    } else {
-      bslib::toggle_sidebar("sidebar", open = FALSE)
-    }
-  }) |>
-    shiny::bindEvent(input$page_navbar)
-
   # Open sidebar accordions ----
   shiny::observe({
     # Data must load before accordions open
