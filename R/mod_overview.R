@@ -7,13 +7,13 @@ mod_overview_ui <- function(id) {
     col_widths = c(3, 9),
     bslib::card(
       id = "card_overview_intro",
-      bslib::card_header("About TPMAs"),
+      bslib::card_header("Purpose"),
       md_file_to_html("app", "text", "overview-about.md")
     ),
     bslib::card(
       full_screen = TRUE,
       id = "card_overview_matrix",
-      bslib::card_header("TPMAs by mechanism"),
+      bslib::card_header("Types of Potentially-Mitigatable Activity (TPMAs) by mechanism"),
       shinycssloaders::withSpinner(shiny::uiOutput(ns("overview_matrix")))
     )
   )
