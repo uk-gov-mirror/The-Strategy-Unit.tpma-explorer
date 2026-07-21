@@ -168,8 +168,8 @@ app_ui <- function(request) {
         )
       ),
 
+      bslib::nav_spacer(), # pushes nav items below to the right
       bslib::nav_item(
-        class = "ms-auto", # push to far-right
         shiny::tags$a(
           href = Sys.getenv("FEEDBACK_FORM_URL"),
           target = "_blank",
