@@ -7,7 +7,7 @@ app_ui <- function(request) {
     bslib::page_navbar(
       id = "page_navbar",
       title = "Explore opportunities to reduce hospital care",
-      selected = "Visualisations", # start with this panel open
+      selected = "Explore data", # start with this panel open
       fillable = FALSE, # scrollable pages (i.e. don't fit cards to window extent)
 
       bslib::nav_panel(
@@ -65,7 +65,7 @@ app_ui <- function(request) {
 
       bslib::nav_panel(
         id = "nav_panel_viz",
-        title = "Visualisations",
+        title = "Explore data",
         icon = bsicons::bs_icon("graph-up"),
 
         bslib::layout_sidebar(
@@ -116,8 +116,8 @@ app_ui <- function(request) {
 
       bslib::nav_panel(
         id = "nav_panel_info",
-        title = "Information",
-        icon = bsicons::bs_icon("info-circle"),
+        title = "About this tool",
+        icon = bsicons::bs_icon("info-square"),
 
         bslib::layout_columns(
           col_widths = c(6, 6),
