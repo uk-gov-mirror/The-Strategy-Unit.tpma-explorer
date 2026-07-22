@@ -81,7 +81,7 @@ app_ui <- function(request) {
             fill = FALSE,
             bslib::card(
               id = "card_info_suggestions",
-              bslib::card_header("Suggestions"),
+              bslib::card_header("Make suggestions"),
               md_file_to_html("app", "text", "info-suggestions.md")
             ),
             bslib::card(
@@ -100,12 +100,12 @@ app_ui <- function(request) {
             fill = FALSE,
             bslib::card(
               id = "card_info_navigation",
-              bslib::card_header("Navigation"),
+              bslib::card_header("Navigate the app"),
               md_file_to_html("app", "text", "info-navigation.md")
             ),
             bslib::card(
               id = "card_info_interface",
-              bslib::card_header("Interface"),
+              bslib::card_header("Adjust the app interface"),
               md_file_to_html("app", "text", "info-interface.md")
             ),
             bslib::card(
