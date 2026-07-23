@@ -1,6 +1,6 @@
 Visit [the New Hospital Programme (NHP) project information website](https://connect.strategyunitwm.nhs.uk/nhp/project_information/) to:
 
-* view **definitions** for TPMAs related to [inpatients](https://connect.strategyunitwm.nhs.uk/nhp/project_information/modelling_methodology/activity_mitigators/inpatient_activity_mitigators.html), [outpatients](https://connect.strategyunitwm.nhs.uk/nhp/project_information/modelling_methodology/activity_mitigators/outpatient_activity_mitigators.html) and [A&E](https://connect.strategyunitwm.nhs.uk/nhp/project_information/modelling_methodology/activity_mitigators/ae_activity_mitigators.html) activity types
+* view **definitions** for TPMAs related to [inpatients](https://connect.strategyunitwm.nhs.uk/nhp/project_information/modelling_methodology/activity_mitigators/inpatient_activity_mitigators.html), [outpatients](https://connect.strategyunitwm.nhs.uk/nhp/project_information/modelling_methodology/activity_mitigators/outpatient_activity_mitigators.html) and [A&E](https://connect.strategyunitwm.nhs.uk/nhp/project_information/modelling_methodology/activity_mitigators/ae_activity_mitigators.html) hospital settings
 * see a [**TPMA lookup**](https://connect.strategyunitwm.nhs.uk/nhp/project_information/user_guide/mitigators_lookup.html), including names, codes and deprecation status
 
 **Peers** are nearest statistical neighbours to the chosen unit.
