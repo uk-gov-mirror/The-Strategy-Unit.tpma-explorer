@@ -13,7 +13,10 @@ mod_select_strategy_ui <- function(id) {
             "Filter TPMAs by hospital setting:",
             bsicons::bs_icon("info-circle")
           ),
-          md_file_to_html("app", "text", "sidebar-tooltip-activity.md")
+          shiny::div(
+            style = "text-align: left;",
+            md_file_to_html("app", "text", "sidebar-tooltip-activity.md")
+          )
         )
       ),
       choices = c(
@@ -32,7 +35,10 @@ mod_select_strategy_ui <- function(id) {
             "Filter TPMAs by mechanism:",
             bsicons::bs_icon("info-circle")
           ),
-          md_file_to_html("app", "text", "sidebar-tooltip-mechanism.md")
+          shiny::div(
+            style = "text-align: left;",
+            md_file_to_html("app", "text", "sidebar-tooltip-mechanism.md")
+          )
         )
       ),
       choices = c(
@@ -52,7 +58,10 @@ mod_select_strategy_ui <- function(id) {
             "Select a TPMA:",
             bsicons::bs_icon("info-circle")
           ),
-          md_file_to_html("app", "text", "sidebar-tooltip-tpma.md")
+          shiny::div(
+            style = "text-align: left;",
+            md_file_to_html("app", "text", "sidebar-tooltip-tpma.md")
+          )
         )
       ),
       choices = NULL

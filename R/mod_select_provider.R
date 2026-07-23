@@ -12,7 +12,10 @@ mod_select_provider_ui <- function(id) {
           shiny::textOutput(ns("choose_org_text"), inline = TRUE),
           bsicons::bs_icon("info-circle")
         ),
-        md_file_to_html("app", "text", "sidebar-tooltip-provider.md"),
+        shiny::div(
+          style = "text-align: left;",
+          md_file_to_html("app", "text", "sidebar-tooltip-provider.md")
+        )
       )
     ),
     choices = NULL

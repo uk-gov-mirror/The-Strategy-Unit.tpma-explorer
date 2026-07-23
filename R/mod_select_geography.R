@@ -13,7 +13,10 @@ mod_select_geography_ui <- function(id) {
           "Explore data for:",
           bsicons::bs_icon("info-circle")
         ),
-        md_file_to_html("app", "text", "sidebar-tooltip-geography.md"),
+        shiny::div(
+          style = "text-align: left;",
+          md_file_to_html("app", "text", "sidebar-tooltip-geography.md")
+        )
       )
     ),
     choices = c(
