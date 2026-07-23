@@ -6,12 +6,15 @@ mod_select_strategy_ui <- function(id) {
   shiny::tagList(
     shiny::checkboxGroupInput(
       ns("strategy_activity_type_select"),
-      label = bslib::tooltip(
-        trigger = list(
-          "Filter TPMAs by activity type",
-          bsicons::bs_icon("info-circle")
-        ),
-        md_file_to_html("app", "text", "sidebar-tooltip-activity.md")
+      label = shiny::div(
+        class = "mb-2",
+        bslib::tooltip(
+          trigger = list(
+            "Filter TPMAs by hospital setting:",
+            bsicons::bs_icon("info-circle")
+          ),
+          md_file_to_html("app", "text", "sidebar-tooltip-activity.md")
+        )
       ),
       choices = c(
         "A&E",
@@ -22,12 +25,15 @@ mod_select_strategy_ui <- function(id) {
     ),
     shiny::checkboxGroupInput(
       ns("strategy_mechanism_select"),
-      label = bslib::tooltip(
-        trigger = list(
-          "Filter TPMAs by mechanism",
-          bsicons::bs_icon("info-circle")
-        ),
-        md_file_to_html("app", "text", "sidebar-tooltip-mechanism.md")
+      label = shiny::div(
+        class = "mb-2",
+        bslib::tooltip(
+          trigger = list(
+            "Filter TPMAs by mechanism:",
+            bsicons::bs_icon("info-circle")
+          ),
+          md_file_to_html("app", "text", "sidebar-tooltip-mechanism.md")
+        )
       ),
       choices = c(
         "De-adoption",
@@ -39,9 +45,15 @@ mod_select_strategy_ui <- function(id) {
     ),
     shiny::selectInput(
       ns("strategy_select"),
-      label = bslib::tooltip(
-        trigger = list("Choose a TPMA", bsicons::bs_icon("info-circle")),
-        md_file_to_html("app", "text", "sidebar-tooltip-tpma.md")
+      label = shiny::div(
+        class = "mb-2",
+        bslib::tooltip(
+          trigger = list(
+            "Select a TPMA:",
+            bsicons::bs_icon("info-circle")
+          ),
+          md_file_to_html("app", "text", "sidebar-tooltip-tpma.md")
+        )
       ),
       choices = NULL
     )

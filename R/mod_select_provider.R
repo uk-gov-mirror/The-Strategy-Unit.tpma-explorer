@@ -5,12 +5,15 @@ mod_select_provider_ui <- function(id) {
   ns <- shiny::NS(id)
   shiny::selectInput(
     ns("provider_select"),
-    label = bslib::tooltip(
-      trigger = list(
-        "Choose a statistical unit",
-        bsicons::bs_icon("info-circle")
-      ),
-      md_file_to_html("app", "text", "sidebar-tooltip-provider.md"),
+    label = shiny::div(
+      class = "mb-2",
+      bslib::tooltip(
+        trigger = list(
+          shiny::textOutput(ns("choose_org_text"), inline = TRUE),
+          bsicons::bs_icon("info-circle")
+        ),
+        md_file_to_html("app", "text", "sidebar-tooltip-provider.md"),
+      )
     ),
     choices = NULL
   )
@@ -68,6 +71,16 @@ mod_select_provider_server <- function(id, selected_geography) {
         choices = provider_choices,
         selected = selected_value
       )
+    })
+
+    output$choose_org_text <- shiny::renderText({
+      unit <- switch(
+        selected_geography(),
+        "la" = "local authority",
+        "nhp" = "provider trust"
+      )
+
+      glue::glue("Select a {unit}:")
     })
 
     shiny::reactive(input$provider_select)
