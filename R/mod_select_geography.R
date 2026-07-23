@@ -6,12 +6,18 @@ mod_select_geography_ui <- function(id) {
 
   shiny::radioButtons(
     ns("geography_select"),
-    label = bslib::tooltip(
-      trigger = list(
-        "Choose a geography",
-        bsicons::bs_icon("info-circle")
-      ),
-      md_file_to_html("app", "text", "sidebar-tooltip-geography.md"),
+    label = shiny::div(
+      class = "mb-2",
+      bslib::tooltip(
+        trigger = list(
+          "Explore data for:",
+          bsicons::bs_icon("info-circle")
+        ),
+        shiny::div(
+          style = "text-align: left;",
+          md_file_to_html("app", "text", "sidebar-tooltip-geography.md")
+        )
+      )
     ),
     choices = c(
       "Local authorities (LAs)" = "la",

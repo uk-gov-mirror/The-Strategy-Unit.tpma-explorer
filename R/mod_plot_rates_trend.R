@@ -5,7 +5,7 @@ mod_plot_rates_trend_ui <- function(id) {
   ns <- shiny::NS(id)
   bslib::card(
     bslib::card_header(
-      "Rates Trend",
+      "Rates trend",
       bslib::tooltip(
         bsicons::bs_icon("info-circle"),
         md_file_to_html("app", "text", "viz-tooltip-trend.md"),

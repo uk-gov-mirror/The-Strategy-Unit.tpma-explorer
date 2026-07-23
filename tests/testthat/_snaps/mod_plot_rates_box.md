@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container" data-bslib-card-init data-full-screen="false" data-require-bs-caller="card()" data-require-bs-version="5" id="bslib-card-X">
           <div class="card-header bslib-gap-spacing">
-            Rates Box
+            Rates box
             <bslib-tooltip placement="right" bsOptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
               <template><p>Distribution of rates for all units, showing only the selected unit (red) and peers (grey).
       The box identifies the limits of the central half of the data.

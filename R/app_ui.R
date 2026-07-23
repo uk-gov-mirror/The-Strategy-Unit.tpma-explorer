@@ -25,20 +25,19 @@ app_ui <- function(request) {
         bslib::layout_sidebar(
           sidebar = bslib::sidebar(
             id = "sidebar",
-            open = "open", # no longer needs to be toggled -- it only exists here
             width = 400,
             bslib::accordion(
               id = "sidebar_accordion",
               open = FALSE,
               multiple = TRUE,
               bslib::accordion_panel(
-                title = "Datasets",
+                title = "Choose a dataset",
                 icon = bsicons::bs_icon("table"),
                 mod_select_geography_ui("mod_select_geography"),
                 mod_select_provider_ui("mod_select_provider")
               ),
               bslib::accordion_panel(
-                title = "Types of Potentially-Mitigatable Activity (TPMAs)",
+                title = "Choose a Type of Potentially-Mitigatable Activity (TPMA)",
                 icon = bsicons::bs_icon("hospital"),
                 mod_select_strategy_ui("mod_select_strategy")
               ),
