@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container" data-bslib-card-init data-full-screen="false" data-require-bs-caller="card()" data-require-bs-version="5" id="bslib-card-X">
           <div class="card-header bslib-gap-spacing">
-            Rates Trend
+            Rates trend
             <bslib-tooltip placement="right" bsOptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
               <template><p>How activity for the selected TPMA has changed over time for the chosen unit (red) and peers (grey).
       Data is age-sex standardised. Years of availability will depend on the selected unit and TPMA.</p>
