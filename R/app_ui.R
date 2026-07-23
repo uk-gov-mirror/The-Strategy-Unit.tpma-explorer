@@ -25,7 +25,6 @@ app_ui <- function(request) {
         bslib::layout_sidebar(
           sidebar = bslib::sidebar(
             id = "sidebar",
-            open = "open", # no longer needs to be toggled -- it only exists here
             width = 400,
             bslib::accordion(
               id = "sidebar_accordion",
