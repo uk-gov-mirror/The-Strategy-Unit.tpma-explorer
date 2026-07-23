@@ -30,4 +30,4 @@ Regarding data:
 - [ ] For a given trust, the presentation of their data in the app matches what we show in the NHP outputs app.
 - [ ] For a given LA, the data in the app matches what can be wrangled from the inputs data.
 
-This should be run for a few 'live' trusts/LAs at minimum and should include a selection of TPMAs across activity types.
+This should be run for a few 'live' trusts/LAs at minimum and should include a selection of TPMAs across hospital settings (activity types).
