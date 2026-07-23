@@ -7,10 +7,12 @@
         <label class="control-label" id="test-strategy_activity_type_select-label" for="test-strategy_activity_type_select">
           <div class="mb-2">
             <bslib-tooltip placement="auto" bsOptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
-              <template><p>Optionally filter TPMAs to a given hospital setting.</p>
+              <template>
+                <div style="text-align: left;"><p>Optionally filter TPMAs to a given hospital setting.</p>
       <p>Acts in addition to the mechanism filter.</p>
       <p>Note: you can widen this sidebar or collapse sections.</p>
-      </template>
+      </div>
+              </template>
               Filter TPMAs by hospital setting:
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-info-circle " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
       <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path></svg>
@@ -42,10 +44,12 @@
         <label class="control-label" id="test-strategy_mechanism_select-label" for="test-strategy_mechanism_select">
           <div class="mb-2">
             <bslib-tooltip placement="auto" bsOptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
-              <template><p>Optionally filter TPMAs to a given mechanism of action.</p>
+              <template>
+                <div style="text-align: left;"><p>Optionally filter TPMAs to a given mechanism of action.</p>
       <p>Acts in addition to the hospital-setting filter.</p>
       <p>Note: you can widen this sidebar or collapse sections.</p>
-      </template>
+      </div>
+              </template>
               Filter TPMAs by mechanism:
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-info-circle " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
       <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path></svg>
@@ -83,10 +87,12 @@
         <label class="control-label" id="test-strategy_select-label" for="test-strategy_select">
           <div class="mb-2">
             <bslib-tooltip placement="auto" bsOptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
-              <template><p>Select a TPMA for which to display data.</p>
+              <template>
+                <div style="text-align: left;"><p>Select a TPMA for which to display data.</p>
       <p>To search: delete the selection and start typing.</p>
       <p>Note: you can widen this sidebar or collapse sections.</p>
-      </template>
+      </div>
+              </template>
               Select a TPMA:
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-info-circle " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
       <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path></svg>

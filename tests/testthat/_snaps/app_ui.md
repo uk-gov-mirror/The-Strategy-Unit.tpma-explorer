@@ -106,7 +106,7 @@
               </bslib-layout-columns>
             </div>
             <div class="tab-pane active" data-value="Explore data" id="tab-X-2">
-              <div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-init="TRUE" data-collapsible-desktop="true" data-collapsible-mobile="true" data-open-desktop="open" data-open-mobile="open" data-require-bs-caller="layout_sidebar()" data-require-bs-version="5" style="--_sidebar-width:400px;">
+              <div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-init="TRUE" data-collapsible-desktop="true" data-collapsible-mobile="true" data-open-desktop="open" data-open-mobile="closed" data-require-bs-caller="layout_sidebar()" data-require-bs-version="5" style="--_sidebar-width:400px;">
                 <div class="main bslib-gap-spacing html-fill-container">
                   mod_show_strategy_text
                   mod_plot_rates
@@ -119,7 +119,7 @@
                     <div class="bslib-grid-item bslib-gap-spacing html-fill-container">mod_plot_nee</div>
                   </bslib-layout-columns>
                 </div>
-                <aside id="sidebar" class="sidebar bslib-sidebar-input" data-resizable>
+                <aside id="sidebar" class="sidebar bslib-sidebar-input" hidden data-resizable>
                   <div class="sidebar-content bslib-gap-spacing">
                     <div class="accordion bslib-accordion-input" data-require-bs-caller="accordion()" data-require-bs-version="5" id="sidebar_accordion">
                       <div class="accordion-item" data-value="Choose a dataset">
