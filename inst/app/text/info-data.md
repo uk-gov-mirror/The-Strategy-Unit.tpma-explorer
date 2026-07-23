@@ -1,6 +1,6 @@
 The primary data source is [**Hospital Episode Statistics (HES)**](https://digital.nhs.uk/data-and-information/data-tools-and-services/data-services/hospital-episode-statistics).
 
-Data is shown for a given **baseline** financial year, which is currently 2023/24, though trend information is also shown.
+Data is shown for a given **baseline** financial year, which is currently 2024/25, though trend information is also shown.
 Counts of less than five are **suppressed**.
 
 The data was **prepared** as part of the modelling process for the New Hospital Programme (NHP).

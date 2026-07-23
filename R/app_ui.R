@@ -7,7 +7,7 @@ app_ui <- function(request) {
     bslib::page_navbar(
       id = "page_navbar",
       title = "Explore opportunities to reduce hospital care",
-      selected = "Visualisations", # start with this panel open
+      selected = "Explore data", # start with this panel open
       fillable = FALSE, # scrollable pages (i.e. don't fit cards to window extent)
 
       bslib::nav_panel(
@@ -18,54 +18,8 @@ app_ui <- function(request) {
       ),
 
       bslib::nav_panel(
-        id = "nav_panel_context",
-        title = "Context",
-        icon = bsicons::bs_icon("book"),
-
-        bslib::layout_columns(
-          col_widths = c(6, 6),
-          bslib::card(
-            id = "card_context_challenge",
-            bslib::card_header("The challenge"),
-            md_file_to_html("app", "text", "context-challenge.md")
-          ),
-          bslib::card(
-            id = "card_context_tool",
-            bslib::card_header("Explore opportunities"),
-            md_file_to_html("app", "text", "context-tool.md")
-          )
-        ),
-        bslib::layout_columns(
-          col_widths = c(6, 6),
-          bslib::card(
-            id = "card_context_tpmas",
-            bslib::card_header("Types of Potentially Mitigatable Activity (TPMAs)"),
-            md_file_to_html("app", "text", "context-tpmas.md")
-          ),
-          bslib::card(
-            id = "card_context_example",
-            bslib::card_header("Example"),
-            md_file_to_html("app", "text", "context-example.md")
-          )
-        ),
-        bslib::layout_columns(
-          col_widths = c(6, 6),
-          bslib::card(
-            id = "card_context_care_shift",
-            bslib::card_header("Opportunities to shift care from hospitals to community (care shift)"),
-            md_file_to_html("app", "text", "context-care-shift.md")
-          ),
-          bslib::card(
-            id = "card_context_reduction",
-            bslib::card_header("How much hospital activity can be reduced?"),
-            md_file_to_html("app", "text", "context-reduction.md")
-          )
-        )
-      ),
-
-      bslib::nav_panel(
         id = "nav_panel_viz",
-        title = "Visualisations",
+        title = "Explore data",
         icon = bsicons::bs_icon("graph-up"),
 
         bslib::layout_sidebar(
@@ -116,8 +70,8 @@ app_ui <- function(request) {
 
       bslib::nav_panel(
         id = "nav_panel_info",
-        title = "Information",
-        icon = bsicons::bs_icon("info-circle"),
+        title = "About this tool",
+        icon = bsicons::bs_icon("info-square"),
 
         bslib::layout_columns(
           col_widths = c(6, 6),
@@ -127,7 +81,7 @@ app_ui <- function(request) {
             fill = FALSE,
             bslib::card(
               id = "card_info_suggestions",
-              bslib::card_header("Suggestions"),
+              bslib::card_header("Make suggestions"),
               md_file_to_html("app", "text", "info-suggestions.md")
             ),
             bslib::card(
@@ -146,12 +100,12 @@ app_ui <- function(request) {
             fill = FALSE,
             bslib::card(
               id = "card_info_navigation",
-              bslib::card_header("Navigation"),
+              bslib::card_header("Navigate the app"),
               md_file_to_html("app", "text", "info-navigation.md")
             ),
             bslib::card(
               id = "card_info_interface",
-              bslib::card_header("Interface"),
+              bslib::card_header("Adjust the app interface"),
               md_file_to_html("app", "text", "info-interface.md")
             ),
             bslib::card(
@@ -168,8 +122,8 @@ app_ui <- function(request) {
         )
       ),
 
+      bslib::nav_spacer(), # pushes nav items below to the right
       bslib::nav_item(
-        class = "ms-auto", # push to far-right
         shiny::tags$a(
           href = Sys.getenv("FEEDBACK_FORM_URL"),
           target = "_blank",

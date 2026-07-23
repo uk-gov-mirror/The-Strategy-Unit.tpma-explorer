@@ -7,5 +7,3 @@ These include care delivered in inpatient wards <span class="badge rounded-pill"
 This activity can be mitigated through four **mechanisms**: prevention, de-adoption, redirection/substitution and hospital efficiency.
 
 This tool allows you to explore these TPMAs: to see the level of these activities in your area or hospital, or examine trends and geographical variation.
-
-This app is in continuous development. Please give feedback by clicking the link in the top-right.
