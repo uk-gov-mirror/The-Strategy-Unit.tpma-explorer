@@ -8,7 +8,10 @@ mod_plot_age_sex_pyramid_ui <- function(id) {
       "Age-sex pyramid",
       bslib::tooltip(
         bsicons::bs_icon("info-circle"),
-        md_file_to_html("app", "text", "viz-tooltip-pyramid.md"),
+        shiny::div(
+          style = "text-align: left;",
+          md_file_to_html("app", "text", "viz-tooltip-pyramid.md")
+        ),
         placement = "right"
       )
     ),

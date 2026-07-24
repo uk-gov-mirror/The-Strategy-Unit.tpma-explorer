@@ -8,7 +8,10 @@ mod_plot_rates_trend_ui <- function(id) {
       "Rates trend",
       bslib::tooltip(
         bsicons::bs_icon("info-circle"),
-        md_file_to_html("app", "text", "viz-tooltip-trend.md"),
+        shiny::div(
+          style = "text-align: left;",
+          md_file_to_html("app", "text", "viz-tooltip-trend.md")
+        ),
         placement = "right"
       )
     ),

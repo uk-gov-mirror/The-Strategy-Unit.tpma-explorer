@@ -8,7 +8,10 @@ mod_table_diagnoses_ui <- function(id) {
       "Diagnoses summary",
       bslib::tooltip(
         bsicons::bs_icon("info-circle"),
-        md_file_to_html("app", "text", "viz-tooltip-diagnoses.md"),
+        shiny::div(
+          style = "text-align: left;",
+          md_file_to_html("app", "text", "viz-tooltip-diagnoses.md")
+        ),
         placement = "right"
       )
     ),

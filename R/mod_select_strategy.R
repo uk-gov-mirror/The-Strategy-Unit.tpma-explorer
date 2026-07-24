@@ -15,7 +15,10 @@ mod_select_strategy_ui <- function(id) {
           ),
           shiny::div(
             style = "text-align: left;",
-            md_file_to_html("app", "text", "sidebar-tooltip-activity.md")
+            shiny::div(
+              style = "text-align: left;",
+              md_file_to_html("app", "text", "sidebar-tooltip-activity.md")
+            )
           )
         )
       ),
