@@ -8,7 +8,10 @@ mod_plot_rates_box_ui <- function(id) {
       "Rates box",
       bslib::tooltip(
         bsicons::bs_icon("info-circle"),
-        md_file_to_html("app", "text", "viz-tooltip-box.md"),
+        shiny::div(
+          style = "text-align: left;",
+          md_file_to_html("app", "text", "viz-tooltip-box.md")
+        ),
         placement = "right"
       )
     ),

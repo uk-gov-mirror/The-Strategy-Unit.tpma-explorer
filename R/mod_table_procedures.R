@@ -8,7 +8,10 @@ mod_table_procedures_ui <- function(id) {
       "Procedures summary",
       bslib::tooltip(
         bsicons::bs_icon("info-circle"),
-        md_file_to_html("app", "text", "viz-tooltip-procedures.md"),
+        shiny::div(
+          style = "text-align: left;",
+          md_file_to_html("app", "text", "viz-tooltip-procedures.md")
+        ),
         placement = "right"
       )
     ),
