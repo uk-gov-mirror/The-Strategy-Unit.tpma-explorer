@@ -78,6 +78,7 @@
       <li>It can help local systems explore variation in hospital utilisation through comparison with statistical peers and the national average.</li>
       <li>It presents the results of <a href="https://bmjopen.bmj.com/content/14/10/e084632">an expert elicitation exercise</a> where subject-matter experts predicted how much activity would be mitigated nationally by 2039/40.</li>
       </ol>
+      <p>Note that some patient spells will fall into more than one category, so the TPMA opportunities may overlap.</p>
       </div>
                         <script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
                       </div>
