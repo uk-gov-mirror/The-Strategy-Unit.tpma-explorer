@@ -7,6 +7,7 @@ mod_plot_nee_ui <- function(id) {
     fill = FALSE,
     bslib::card_header("National Elicitation Exercise (NEE) estimate"),
     bslib::card_body(
+      md_file_to_html("app", "text", "viz-nee.md"),
       shinycssloaders::withSpinner(shiny::htmlOutput(ns("nee_text")))
     )
   )
@@ -37,7 +38,6 @@ mod_plot_nee_server <- function(id, selected_strategy) {
       validate_strategy_selected(selected_strategy())
 
       df <- selected_nee_data()
-      nee_intro <- md_file_to_html("app", "text", "viz-nee.md")
 
       if (nrow(df) == 0) {
         result <- paste(
@@ -57,7 +57,7 @@ mod_plot_nee_server <- function(id, selected_strategy) {
         )
       }
 
-      paste(nee_intro, result)
+      result
     })
   })
 }

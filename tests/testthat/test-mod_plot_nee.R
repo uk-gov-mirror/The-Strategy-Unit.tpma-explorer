@@ -48,7 +48,7 @@ test_that("nee (no rows)", {
       # assert
       expect_equal(
         output$nee_text,
-        "This TPMA was not part of that exercise. No estimate is available."
+        "This TPMA was not part of that exercise. <b>No estimate is available</b>."
       )
     }
   )
