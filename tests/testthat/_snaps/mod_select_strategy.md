@@ -8,10 +8,12 @@
           <div class="mb-2">
             <bslib-tooltip placement="auto" bsOptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
               <template>
-                <div style="text-align: left;"><p>Optionally filter TPMAs to a given hospital setting.</p>
+                <div style="text-align: left;">
+                  <div style="text-align: left;"><p>Optionally filter TPMAs to a given hospital setting.</p>
       <p>Acts in addition to the mechanism filter.</p>
       <p>Note: you can widen this sidebar or collapse sections.</p>
       </div>
+                </div>
               </template>
               Filter TPMAs by hospital setting:
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-info-circle " style="height:1em;width:1em;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img" ><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
