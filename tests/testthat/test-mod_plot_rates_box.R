@@ -17,7 +17,9 @@ test_that("rates_box_plot (no rows)", {
     mod_plot_rates_box_server,
     args = list(
       rates = \() tibble::tibble(),
-      y_axis_limits = \() c(0, 100)
+      y_axis_limits = \() c(0, 100),
+      selected_strategy = \() "strategy",
+      base_size = 16
     ),
     {
       # assert
@@ -52,6 +54,7 @@ test_that("rates_box_plot (with rows)", {
     args = list(
       rates = \() sample_data,
       y_axis_limits = \() c(0, 100),
+      selected_strategy = \() "strategy",
       base_size = 16
     ),
     {
