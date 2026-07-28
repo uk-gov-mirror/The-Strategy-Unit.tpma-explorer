@@ -20,6 +20,7 @@ test_that("rates_trend_plot (no rows)", {
       y_axis_limits = \() c(0, 100),
       y_axis_title = \() "Y Axis",
       y_labels = \() "Y Labels",
+      selected_strategy = \() "strategy",
       selected_year = \() 202324,
       base_size = 16
     ),
@@ -58,6 +59,7 @@ test_that("rates_trend_plot (with rows)", {
       y_axis_limits = \() c(0, 100),
       y_axis_title = \() "Y Axis",
       y_labels = \() "Y Labels",
+      selected_strategy = \() "strategy",
       selected_year = \() 202324,
       base_size = 16
     ),

@@ -18,5 +18,5 @@ fetch_tpma_lookup <- function() {
         glue::glue("{tpma_code}: {tpma_name} ({tpma_subtype})")
       )
     ) |>
-    dplyr::relocate(.data$tpma_name_full, .after = .data$tpma_subtype)
+    dplyr::relocate("tpma_name_full", .after = "tpma_subtype")
 }

@@ -68,7 +68,6 @@ test_that("providers reactive", {
   )
 })
 
-
 test_that("it updates the select input", {
   # arrange
   m <- mock()
@@ -102,7 +101,8 @@ test_that("it updates the select input", {
         1,
         session,
         "provider_select",
-        choices = c("a" = "A", "b" = "B")
+        choices = c("a" = "A", "b" = "B"),
+        selected = "RRK" # default selection
       )
 
       selected_geography("la")
@@ -113,45 +113,44 @@ test_that("it updates the select input", {
         2,
         session,
         "provider_select",
-        choices = c("c" = "C", "d" = "D")
+        choices = c("c" = "C", "d" = "D"),
+        selected = "E08000025" # default selection
       )
     }
   )
 })
 
-test_that("onRestored works correctly", {
+test_that("it selects the restored value when it is valid", {
   # arrange
   m_update <- mock()
-  m_restored <- mock()
+  local_mocked_bindings("updateSelectInput" = m_update, .package = "shiny")
+
+  m_restore <- mock("XYZ")
+  local_mocked_bindings("restoreInput" = m_restore, .package = "shiny")
+
   local_mocked_bindings(
-    "updateSelectInput" = m_update,
-    "onRestored" = m_restored,
-    .package = "shiny"
+    "read_json_file" = mock(
+      list("XYZ" = "Some Trust", "RRK" = "Uni Hospitals Birmingham")
+    ),
+    .package = "yyjsonr"
   )
 
   # act
   shiny::testServer(
     mod_select_provider_server,
-    args = list(
-      selected_geography = reactiveVal("nhp")
-    ),
+    args = list(selected_geography = \() "nhp"),
     {
-      # assert
-      expect_called(m_restored, 1)
-      expect_args(m_restored, 1, restore)
+      session$private$flush()
 
-      restore(list(
-        input = list(
-          provider_select = "a"
-        )
-      ))
+      # assert
       expect_called(m_update, 1)
       expect_args(
         m_update,
         1,
         session,
         "provider_select",
-        choices = c("a")
+        choices = c("Some Trust" = "XYZ", "Uni Hospitals Birmingham" = "RRK"),
+        selected = "XYZ" # i.e. the restored value, not the 'RRK' default
       )
     }
   )

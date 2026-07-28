@@ -120,6 +120,7 @@ test_that("modules are correctly instantiated", {
         y_axis_limits,
         y_axis_title,
         y_labels,
+        selected_strategy,
         selected_year,
         16
       )
@@ -133,6 +134,7 @@ test_that("modules are correctly instantiated", {
         rates_funnel_calculations,
         y_axis_limits,
         funnel_x_title,
+        selected_strategy,
         16
       )
 
@@ -143,6 +145,7 @@ test_that("modules are correctly instantiated", {
         "mod_plot_rates_box",
         rates_funnel_data,
         y_axis_limits,
+        selected_strategy,
         16
       )
     }

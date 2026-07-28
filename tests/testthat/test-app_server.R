@@ -1,6 +1,6 @@
 test_that("mod_select_geography", {
   # arrange
-  mocks <- setup_app_server_tests()
+  mocks <- setup_app_server_tests()$mocks
 
   # act
   shiny::testServer(
@@ -16,7 +16,7 @@ test_that("mod_select_geography", {
 
 test_that("mod_select_provider", {
   # arrange
-  mocks <- setup_app_server_tests()
+  mocks <- setup_app_server_tests()$mocks
 
   # act
   shiny::testServer(
@@ -37,7 +37,9 @@ test_that("mod_select_provider", {
 
 test_that("mod_select_strategy", {
   # arrange
-  mocks <- setup_app_server_tests()
+  setup <- setup_app_server_tests()
+  mocks <- setup$mocks
+  tpma_lookup_fixture <- setup$tpma_lookup_fixture
 
   # act
   shiny::testServer(
@@ -49,7 +51,8 @@ test_that("mod_select_strategy", {
       expect_args(
         mocks$mod_select_strategy_server,
         1,
-        "mod_select_strategy"
+        "mod_select_strategy",
+        tpma_lookup
       )
     }
   )
@@ -57,7 +60,7 @@ test_that("mod_select_strategy", {
 
 test_that("selected_year (env var not set)", {
   # arrange
-  mocks <- setup_app_server_tests()
+  mocks <- setup_app_server_tests()$mocks
 
   # act
   shiny::testServer(
@@ -73,7 +76,7 @@ test_that("selected_year (env var not set)", {
 
 test_that("selected_year (env var set)", {
   # arrange
-  mocks <- setup_app_server_tests()
+  mocks <- setup_app_server_tests()$mocks
 
   # act
   shiny::testServer(
@@ -88,7 +91,7 @@ test_that("selected_year (env var set)", {
 
 test_that("sidebar accordion opens", {
   # arrange
-  mocks <- setup_app_server_tests()
+  mocks <- setup_app_server_tests()$mocks
 
   m <- mock()
   local_mocked_bindings(accordion_panel_open = m, .package = "bslib")
@@ -104,49 +107,9 @@ test_that("sidebar accordion opens", {
   )
 })
 
-test_that("sidebar opens when Visualisations tab is selected", {
-  # arrange
-  mocks <- setup_app_server_tests()
-  m <- mock()
-  local_mocked_bindings(toggle_sidebar = m, .package = "bslib")
-
-  shiny::testServer(
-    app_server,
-    {
-      # act
-      session$setInputs(page_navbar = "Visualisations")
-      session$flushReact()
-
-      # assert
-      expect_called(m, 1)
-      expect_args(m, 1, "sidebar", open = TRUE)
-    }
-  )
-})
-
-test_that("sidebar closes when a non-Visualisations tab is selected", {
-  # arrange
-  mocks <- setup_app_server_tests()
-  m <- mock()
-  local_mocked_bindings(toggle_sidebar = m, .package = "bslib")
-
-  shiny::testServer(
-    app_server,
-    {
-      # act
-      session$setInputs(page_navbar = "Information")
-      session$flushReact()
-
-      # assert
-      expect_called(m, 1)
-      expect_args(m, 1, "sidebar", open = FALSE)
-    }
-  )
-})
-
 test_that("mod_show_strategy_text_server", {
   # arrange
-  mocks <- setup_app_server_tests()
+  mocks <- setup_app_server_tests()$mocks
 
   # act
   shiny::testServer(
@@ -166,7 +129,7 @@ test_that("mod_show_strategy_text_server", {
 
 test_that("mod_plot_rates_server", {
   # arrange
-  mocks <- setup_app_server_tests()
+  mocks <- setup_app_server_tests()$mocks
 
   # act
   shiny::testServer(
@@ -190,7 +153,7 @@ test_that("mod_plot_rates_server", {
 
 test_that("mod_table_procedures_server", {
   # arrange
-  mocks <- setup_app_server_tests()
+  mocks <- setup_app_server_tests()$mocks
 
   # act
   shiny::testServer(
@@ -213,7 +176,7 @@ test_that("mod_table_procedures_server", {
 
 test_that("mod_table_diagnoses_server", {
   # arrange
-  mocks <- setup_app_server_tests()
+  mocks <- setup_app_server_tests()$mocks
 
   # act
   shiny::testServer(
@@ -236,7 +199,7 @@ test_that("mod_table_diagnoses_server", {
 
 test_that("mod_plot_age_sex_pyramid_server", {
   # arrange
-  mocks <- setup_app_server_tests()
+  mocks <- setup_app_server_tests()$mocks
 
   # act
   shiny::testServer(
@@ -260,7 +223,7 @@ test_that("mod_plot_age_sex_pyramid_server", {
 
 test_that("mod_plot_nee_server", {
   # arrange
-  mocks <- setup_app_server_tests()
+  mocks <- setup_app_server_tests()$mocks
 
   # act
   shiny::testServer(

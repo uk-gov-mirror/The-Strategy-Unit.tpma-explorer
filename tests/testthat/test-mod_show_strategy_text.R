@@ -10,30 +10,32 @@ test_that("ui", {
 
 test_that("mod_show_strategy_text_get_descriptions_lookup", {
   # arrange
-  sample_descriptions_lookup <- c(
-    "strategy_a",
-    "strategy_b"
-  )
-  m <- mock(sample_descriptions_lookup)
-  local_mocked_bindings(
-    "read_json_file" = m,
-    .package = "yyjsonr"
-  )
 
   # act
-  actual <- mod_show_strategy_text_get_descriptions_lookup()
+  lookup <- mod_show_strategy_text_get_descriptions_lookup()
 
   # assert
-  expect_equal(actual, sample_descriptions_lookup)
+  expect_s3_class(lookup, "data.frame")
+  expect_true(all(
+    c("tpma_variable", "tpma_description_name") %in% names(lookup)
+  ))
 })
 
 test_that("strategy_stub", {
   # arrange
   local_mocked_bindings(
     "mod_show_strategy_text_get_descriptions_lookup" = \() {
-      c(
-        "strategy_a",
-        "strategy_b"
+      tibble::tibble(
+        tpma_variable = c(
+          "strategy_a_acute",
+          "strategy_a_chronic",
+          "strategy_b"
+        ),
+        tpma_description_name = c(
+          "strategy_a",
+          "strategy_a",
+          "strategy_b"
+        )
       )
     }
   )
@@ -64,13 +66,21 @@ test_that("strategy_text", {
   # arrange
   m <- mock("text_a", "text_b", "text_a")
   local_mocked_bindings(
-    "mod_show_strategy_text_get_descriptions_lookup" = \() {
-      c(
-        "strategy_a",
-        "strategy_b"
+    mod_show_strategy_text_get_descriptions_lookup = function() {
+      tibble::tibble(
+        tpma_variable = c(
+          "strategy_a_acute",
+          "strategy_a_chronic",
+          "strategy_b"
+        ),
+        tpma_description_name = c(
+          "strategy_a",
+          "strategy_a",
+          "strategy_b"
+        )
       )
     },
-    "read_strategy_text" = m
+    read_strategy_text = m
   )
 
   # act
@@ -104,25 +114,37 @@ test_that("strategy_text", {
 test_that("strategy_text is rendered", {
   # arrange
   m <- mock("html")
+
   local_mocked_bindings(
-    "mod_show_strategy_text_get_descriptions_lookup" = \() {
-      c(
-        "strategy_a",
-        "strategy_b"
+    mod_show_strategy_text_get_descriptions_lookup = function() {
+      tibble::tibble(
+        tpma_variable = c(
+          "strategy_a_acute",
+          "strategy_a_chronic",
+          "strategy_b"
+        ),
+        tpma_description_name = c(
+          "strategy_a",
+          "strategy_a",
+          "strategy_b"
+        )
       )
     },
-    "read_strategy_text" = \(...) "strategy text",
-    "md_string_to_html" = m
+    read_strategy_text = function(...) "strategy text",
+    md_string_to_html = m,
+    validate_strategy_selected = function(...) NULL
   )
 
   # act
   shiny::testServer(
     mod_show_strategy_text_server,
-    args = list(selected_strategy = reactiveVal("strategy_a")),
+    args = list(
+      selected_strategy = reactiveVal("strategy_a_acute")
+    ),
     {
-      # assert
       actual <- output$strategy_text
 
+      # assert
       expect_equal(actual, "html")
 
       expect_called(m, 1)

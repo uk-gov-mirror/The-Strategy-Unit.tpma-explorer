@@ -20,6 +20,7 @@ test_that("rates_funnel_plot (no rows)", {
       funnel_calculations = \() "funnel calculations",
       y_axis_limits = \() c(0, 100),
       x_axis_title = \() "X Axis",
+      selected_strategy = \() "strategy",
       base_size = 16
     ),
     {
@@ -57,6 +58,7 @@ test_that("rates_funnel_plot (with rows)", {
       funnel_calculations = \() "funnel calculations",
       y_axis_limits = \() c(0, 100),
       x_axis_title = \() "X Axis",
+      selected_strategy = \() "strategy",
       base_size = 16
     ),
     {

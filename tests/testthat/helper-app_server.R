@@ -1,5 +1,17 @@
 setup_app_server_tests <- function(.env = parent.frame()) {
+  tpma_lookup_fixture <- tibble::tibble(
+    tpma_code = c("AA-001", "AA-002"),
+    tpma_name = c("Example TPMA one", "Example TPMA two"),
+    tpma_subtype = NA_character_,
+    tpma_name_full = c("AA-001: Example TPMA one", "AA-002: Example TPMA two"),
+    tpma_variable = c("strategy_1", "strategy_2"),
+    activity_type = c("Inpatients", "A&E"),
+    tpma_mechanism = c("Prevention", "Redirection/Substitution"),
+    active_to = NA_character_
+  )
+
   mocks <- list(
+    fetch_tpma_lookup = mockery::mock(tpma_lookup_fixture),
     mod_select_geography_server = mockery::mock(shiny::reactiveVal("nhp")),
     mod_select_provider_server = mockery::mock(shiny::reactiveVal("ABC")),
     mod_select_strategy_server = mockery::mock(shiny::reactiveVal("strategy")),
@@ -13,5 +25,5 @@ setup_app_server_tests <- function(.env = parent.frame()) {
 
   do.call(testthat::local_mocked_bindings, c(mocks, .env = .env))
 
-  mocks
+  dplyr::lst(mocks, tpma_lookup_fixture)
 }
