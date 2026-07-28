@@ -49,7 +49,7 @@ test_that("strategies_filtered filters by activity_type and mechanism", {
       # assert 1
       expect_equal(
         strategies_filtered()$tpma_code,
-        c("AA-001", "AA-002", "EF-001")
+        c("IP-EF-001", "IP-EF-002", "IP-EF-003")
       )
 
       # act 2
@@ -62,7 +62,7 @@ test_that("strategies_filtered filters by activity_type and mechanism", {
       # assert 2
       expect_equal(
         strategies_filtered()$tpma_code,
-        c("AA-001", "EF-001")
+        c("IP-EF-001", "IP-EF-003")
       )
     }
   )
@@ -82,6 +82,46 @@ test_that("strategies_filtered returns zero rows when nothing selected", {
       session$private$flush()
 
       expect_equal(nrow(strategies_filtered()), 0)
+    }
+  )
+})
+
+test_that("it selects the restored value when it is valid", {
+  # arrange
+  fixture <- strategy_test_fixture()
+
+  m_update <- mock()
+  local_mocked_bindings("updateSelectInput" = m_update, .package = "shiny")
+
+  m_restore <- mock("c") # 'c' is a valid tpma_variable for this selection
+  local_mocked_bindings("restoreInput" = m_restore, .package = "shiny")
+
+  # act
+  shiny::testServer(
+    mod_select_strategy_server,
+    args = list(tpma_lookup = fixture),
+    {
+      session$setInputs(
+        strategy_activity_type_select = "Inpatients",
+        strategy_mechanism_select = character(0)
+      )
+      session$private$flush()
+
+      # assert
+      expect_called(m_update, 1)
+      expect_args(
+        m_update,
+        1,
+        inputId = "strategy_select",
+        choices = list(
+          "Inpatients: Prevention" = c("IP-EF-002: Strategy B" = "b"),
+          "Inpatients: Redirection/Substitution" = c(
+            "IP-EF-001: Strategy A" = "a",
+            "IP-EF-003: Strategy C" = "c"
+          )
+        ),
+        selected = 'c' # the restored value, not the first available ("b")
+      )
     }
   )
 })
@@ -140,10 +180,32 @@ test_that("it updates strategy_select choices when rows are available", {
         1,
         inputId = "strategy_select",
         choices = list(
-          "Outpatients: Redirection/Substitution" = c("AA-003: Strategy D" = "d")
+          "Outpatients: Redirection/Substitution" = c("OP-AA-001: Strategy D" = "d")
         ),
         selected = "d"
       )
+    }
+  )
+})
+
+test_that("selected_strategy returns NULL when there are no matching rows", {
+  # arrange
+  fixture <- strategy_test_fixture()
+
+  # act
+  shiny::testServer(
+    mod_select_strategy_server,
+    args = list(tpma_lookup = fixture),
+    {
+      session$setInputs(
+        strategy_activity_type_select = character(0),
+        strategy_mechanism_select = character(0),
+        strategy_select = "a" # even if this were somehow set, no rows means no valid strategy
+      )
+      session$private$flush()
+
+      # assert
+      expect_null(selected_strategy())
     }
   )
 })
