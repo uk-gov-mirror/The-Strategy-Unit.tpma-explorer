@@ -119,3 +119,39 @@ test_that("it updates the select input", {
     }
   )
 })
+
+test_that("it selects the restored value when it is valid", {
+  # arrange
+  m_update <- mock()
+  local_mocked_bindings("updateSelectInput" = m_update, .package = "shiny")
+
+  m_restore <- mock("XYZ")
+  local_mocked_bindings("restoreInput" = m_restore, .package = "shiny")
+
+  local_mocked_bindings(
+    "read_json_file" = mock(
+      list("XYZ" = "Some Trust", "RRK" = "Uni Hospitals Birmingham")
+    ),
+    .package = "yyjsonr"
+  )
+
+  # act
+  shiny::testServer(
+    mod_select_provider_server,
+    args = list(selected_geography = \() "nhp"),
+    {
+      session$private$flush()
+
+      # assert
+      expect_called(m_update, 1)
+      expect_args(
+        m_update,
+        1,
+        session,
+        "provider_select",
+        choices = c("Some Trust" = "XYZ", "Uni Hospitals Birmingham" = "RRK"),
+        selected = "XYZ" # i.e. the restored value, not the 'RRK' default
+      )
+    }
+  )
+})
