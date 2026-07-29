@@ -4,6 +4,13 @@
 app_ui <- function(request) {
   shiny::tagList(
     shinyjs::useShinyjs(),
+    shiny::tags$head(
+      shiny::tags$link(
+        rel = "stylesheet",
+        type = "text/css",
+        href = "www/su.css"
+      )
+    ),
     bslib::page_navbar(
       id = "page_navbar",
       title = "Explore opportunities to reduce hospital care",
