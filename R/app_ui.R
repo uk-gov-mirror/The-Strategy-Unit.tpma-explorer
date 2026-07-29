@@ -54,7 +54,8 @@ app_ui <- function(request) {
                 shiny::bookmarkButton(
                   label = "Generate shareable URL",
                   title = "Bookmark your selections and get a URL for sharing",
-                  icon = NULL
+                  icon = NULL,
+                  class = "btn-bookmark" # for targeting CSS
                 )
               )
             )
