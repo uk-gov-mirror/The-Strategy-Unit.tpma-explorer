@@ -68,6 +68,23 @@ mod_select_strategy_ui <- function(id) {
         )
       ),
       choices = NULL
+    ),
+    shiny::selectInput(
+      ns("strategy_subtype_select"),
+      label = shiny::div(
+        class = "mb-2",
+        bslib::tooltip(
+          trigger = list(
+            "Select a TPMA sub-type:",
+            bsicons::bs_icon("info-circle")
+          ),
+          shiny::div(
+            style = "text-align: left;",
+            md_file_to_html("app", "text", "sidebar-tooltip-tpma-subtype.md")
+          )
+        )
+      ),
+      choices = NULL
     )
   )
 }
