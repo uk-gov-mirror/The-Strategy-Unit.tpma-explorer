@@ -1,80 +1,3 @@
-test_that("get_container uses get_azure_token when not in a managed environment", {
-  # arrange
-  m_get_managed_token <- \() stop("expected error")
-  m_get_azure_token <- mock("token")
-  m_blob_endpoint <- mock("ep")
-  m_storage_container <- mock("container")
-
-  local_mocked_bindings(
-    "get_managed_token" = m_get_managed_token,
-    "get_azure_token" = m_get_azure_token,
-    .package = "AzureAuth"
-  )
-  local_mocked_bindings(
-    "blob_endpoint" = m_blob_endpoint,
-    "storage_container" = m_storage_container,
-    .package = "AzureStor"
-  )
-
-  # act
-  actual <- get_container("ep_uri", "container_name")
-
-  # assert
-  expect_called(m_get_azure_token, 1)
-  expect_args(
-    m_get_azure_token,
-    1,
-    resource = "https://storage.azure.com",
-    tenant = "common",
-    app = "04b07795-8ddb-461a-bbee-02f9e1bf7b46",
-    use_cache = TRUE
-  )
-
-  expect_called(m_blob_endpoint, 1)
-  expect_args(m_blob_endpoint, 1, "ep_uri", token = "token")
-
-  expect_called(m_storage_container, 1)
-  expect_args(m_storage_container, 1, "ep", "container_name")
-
-  expect_equal(actual, "container")
-})
-
-test_that("get_container uses get_managed_token when in a managed environment", {
-  # arrange
-  m_get_managed_token <- mock("token")
-  m_get_azure_token <- mock()
-  m_blob_endpoint <- mock("ep")
-  m_storage_container <- mock("container")
-
-  local_mocked_bindings(
-    "get_managed_token" = m_get_managed_token,
-    "get_azure_token" = m_get_azure_token,
-    .package = "AzureAuth"
-  )
-  local_mocked_bindings(
-    "blob_endpoint" = m_blob_endpoint,
-    "storage_container" = m_storage_container,
-    .package = "AzureStor"
-  )
-
-  # act
-  actual <- get_container("ep_uri", "container_name")
-
-  # assert
-  expect_called(m_get_managed_token, 1)
-  expect_args(m_get_managed_token, 1, "https://storage.azure.com/")
-
-  expect_called(m_get_azure_token, 0)
-
-  expect_called(m_blob_endpoint, 1)
-  expect_args(m_blob_endpoint, 1, "ep_uri", token = "token")
-
-  expect_called(m_storage_container, 1)
-  expect_args(m_storage_container, 1, "ep", "container_name")
-
-  expect_equal(actual, "container")
-})
-
 test_that("download_geo_data exits if path already exists", {
   # arrange
   m_dir_create <- mock()
@@ -144,6 +67,9 @@ test_that("_download_geo_data calls _download_geo_data_file for each data type",
   m_download_geo_data_file <- mock()
   local_mocked_bindings(
     "get_container" = m_container,
+    .package = "azkit"
+  )
+  local_mocked_bindings(
     "_download_geo_data_file" = m_download_geo_data_file
   )
 
