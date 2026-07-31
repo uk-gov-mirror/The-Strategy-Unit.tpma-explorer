@@ -3,7 +3,7 @@
 run_app <- function() {
   download_all_data()
 
-  golem::add_resource_path(
+  shiny::addResourcePath(
     "www",
     app_sys("app/www")
   )
