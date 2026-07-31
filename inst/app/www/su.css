@@ -21,7 +21,7 @@ body,
 .markdown a,
 .main-content a,
 a {
-  color: var(--su-charcoal) !important;
+  color: var(--su-blue) !important;
   text-decoration: underline;
   transition: color 0.2s;
 }
@@ -29,7 +29,7 @@ a {
 .markdown a:hover,
 .main-content a:hover,
 a:hover {
-  color: var(--su-yellow) !important;
+  color: var(--su-charcoal) !important;
 }
 
 .navbar {
@@ -51,6 +51,11 @@ a:hover {
   box-shadow: none;
 }
 
+/* Selectable sidebar elements */
+.shiny-input-container input:checked {
+  background-color: var(--su-yellow) !important;
+  border-color: var(--su-yellow) !important;
+}
 .selectize-dropdown-content .option.active {
   background-color: var(--su-white) !important;
   color: var(--su-charcoal) !important;
