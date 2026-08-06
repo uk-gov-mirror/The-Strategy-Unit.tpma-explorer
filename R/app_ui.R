@@ -3,10 +3,30 @@
 #' @noRd
 app_ui <- function(request) {
   shiny::tagList(
-    shinyjs::useShinyjs(),
+    shinyjs::useShinyjs(), # enable/disable inputs
+    shiny::tags$head(
+      shiny::tags$link(
+        rel = "shortcut icon",
+        href = "www/favicon.ico"
+      ),
+      shiny::tags$link(
+        rel = "stylesheet",
+        type = "text/css",
+        href = "www/su.css"
+      )
+    ),
+
     bslib::page_navbar(
       id = "page_navbar",
-      title = "Explore opportunities to reduce hospital care",
+      title = shiny::tagList(
+        shiny::tags$img(
+          src = "www/logo.png",
+          height = "30px",
+          style = "margin-right: 10px;",
+          alt = "The Strategy Unit logo"
+        ),
+        "Explore opportunities to reduce hospital care"
+      ),
       selected = "Explore data", # start with this panel open
       fillable = FALSE, # scrollable pages (i.e. don't fit cards to window extent)
 
@@ -47,7 +67,8 @@ app_ui <- function(request) {
                 shiny::bookmarkButton(
                   label = "Generate shareable URL",
                   title = "Bookmark your selections and get a URL for sharing",
-                  icon = NULL
+                  icon = NULL,
+                  class = "btn-bookmark" # for targeting CSS
                 )
               )
             )

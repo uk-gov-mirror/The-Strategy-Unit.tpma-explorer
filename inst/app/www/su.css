@@ -1,0 +1,71 @@
+/* Adapted from https://github.com/The-Strategy-Unit/su-brand-yml/ */
+
+:root {
+  /* SU Brand Palette */
+  --su-grey: #959595;
+  --su-charcoal: #2c2825;
+  --su-yellow: #f9bd07;
+  --su-white: #f5f4f3;
+  --su-blue: #5881c1;
+}
+
+body,
+.content,
+.markdown,
+.main-content {
+  color: var(--su-charcoal) !important;
+  background: var(--su-white) !important;
+}
+
+.content a,
+.markdown a,
+.main-content a,
+a {
+  color: var(--su-blue) !important;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.content a:hover,
+.markdown a:hover,
+.main-content a:hover,
+a:hover {
+  color: var(--su-charcoal) !important;
+}
+
+.navbar {
+  background: var(--su-yellow);
+}
+.navbar a {
+  color: var(--su-charcoal) !important;
+}
+
+.accordion-item,
+.accordion-button,
+.accordion-body {
+  background-color: var(--su-white) !important;
+  color: var(--su-charcoal) !important;
+}
+.accordion-button:not(.collapsed) {
+  background-color: var(--su-white) !important;
+  color: var(--su-charcoal) !important;
+  box-shadow: none;
+}
+
+/* Selectable sidebar elements */
+.shiny-input-container input:checked {
+  background-color: var(--su-yellow) !important;
+  border-color: var(--su-yellow) !important;
+}
+.selectize-dropdown-content .option.active {
+  background-color: var(--su-white) !important;
+  color: var(--su-charcoal) !important;
+}
+.selectize-dropdown-content .option.selected {
+  background-color: var(--su-yellow) !important;
+  color: var(--su-charcoal) !important;
+}
+.btn-bookmark {
+  background-color: var(--su-yellow) !important;
+  border-color: var(--su-yellow) !important;
+  color: var(--su-charcoal) !important;
+}

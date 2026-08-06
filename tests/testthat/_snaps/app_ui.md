@@ -13,7 +13,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <span class="navbar-brand">Explore opportunities to reduce hospital care</span>
+              <span class="navbar-brand">
+                <img src="www/logo.png" height="30px" style="margin-right: 10px;" alt="The Strategy Unit logo"/>
+                Explore opportunities to reduce hospital care
+              </span>
             </div>
             <div class="navbar-collapse collapse" id="navbar-collapse-X">
               <ul class="nav navbar-nav nav-underline shiny-tab-input" id="page_navbar" data-tabsetid="X">
@@ -158,7 +161,7 @@
                         </div>
                         <div id="bslib-accordion-panel-X" class="accordion-collapse collapse">
                           <div class="accordion-body">
-                            <button id="._bookmark_" type="button" class="btn btn-default action-button" title="Bookmark your selections and get a URL for sharing"><span class="action-label">Generate shareable URL</span></button>
+                            <button class="btn btn-default action-button btn-bookmark" id="._bookmark_" title="Bookmark your selections and get a URL for sharing" type="button"><span class="action-label">Generate shareable URL</span></button>
                           </div>
                         </div>
                       </div>
