@@ -207,9 +207,9 @@ mod_select_strategy_server <- function(id, tpma_lookup) {
         )
         shinyjs::disable("strategy_subtype_select")
       } else {
-        # Restore strategy value from bookmark, otherwise NULL
+        # Restore sub-type value from bookmark, otherwise NULL
         restored_value <- shiny::restoreInput(
-          id = session$ns("strategy_subset_select"),
+          id = session$ns("strategy_subtype_select"),
           default = NULL
         )
 
