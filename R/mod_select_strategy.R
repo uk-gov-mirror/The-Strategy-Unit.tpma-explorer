@@ -247,16 +247,27 @@ mod_select_strategy_server <- function(id, tpma_lookup) {
 
       tpma <- input$strategy_select
       subtype <- input$strategy_subtype_select
-      has_subtype <- subtype != ""
+
+      shiny::req(tpma) # protect against possible NULL/""
 
       tpma_df <- choices_df |> dplyr::filter(.data$tpma_name == tpma)
+
+      # Make sure the sub-type is valid for the TPMA
+      valid_subtypes <- tpma_df |> dplyr::pull("tpma_subtype")
+      is_subtype_valid <- subtype %in% valid_subtypes
+      has_subtype <- !is.null(subtype) && subtype != "" && is_subtype_valid
 
       if (has_subtype) {
         tpma_df <- tpma_df |> dplyr::filter(.data$tpma_subtype == subtype)
       }
 
       # tpma_variable (e.g. eol_care_2_days) drives downstream data selection
-      tpma_df |> dplyr::pull("tpma_variable")
+      tpma_variable <- tpma_df |> dplyr::pull("tpma_variable")
+
+      # Ensure only one value (transient states might have more)
+      shiny::req(length(tpma_variable) == 1)
+
+      tpma_variable
     })
 
     selected_strategy
