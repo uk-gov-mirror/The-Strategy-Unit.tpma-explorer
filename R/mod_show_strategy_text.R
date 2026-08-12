@@ -30,7 +30,8 @@ mod_show_strategy_text_get_descriptions_lookup <- function() {
 #' @noRd
 mod_show_strategy_text_server <- function(
   id,
-  selected_strategy
+  selected_strategy,
+  tpma_lookup
 ) {
   descriptions_lookup <- mod_show_strategy_text_get_descriptions_lookup()
 
@@ -52,8 +53,14 @@ mod_show_strategy_text_server <- function(
     output$strategy_text <- shiny::renderText({
       validate_strategy_selected(selected_strategy())
 
-      t <- shiny::req(strategy_text())
-      md_string_to_html(t)
+      tpma_name <- tpma_lookup |>
+        dplyr::filter(.data$tpma_variable == selected_strategy()) |>
+        dplyr::pull("tpma_name_full")
+
+      tpma_text <- shiny::req(strategy_text())
+
+      c(glue::glue("**{tpma_name}**\n\n"), tpma_text) |>
+        md_string_to_html()
     })
   })
 }
