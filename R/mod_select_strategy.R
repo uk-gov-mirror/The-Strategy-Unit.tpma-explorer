@@ -169,7 +169,7 @@ mod_select_strategy_server <- function(id, tpma_lookup) {
         ) {
           restored_value
         } else {
-          strategy_choices[[1]][[1]] # explicitly select first available
+          "Ambulatory Care Sensitive Admissions" # set specific default
         }
 
         shiny::updateSelectInput(
