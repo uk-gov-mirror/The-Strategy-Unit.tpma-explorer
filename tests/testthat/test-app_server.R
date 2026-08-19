@@ -121,7 +121,8 @@ test_that("mod_show_strategy_text_server", {
         mocks$mod_show_strategy_text_server,
         1,
         "mod_show_strategy_text",
-        selected_strategy
+        selected_strategy,
+        tpma_lookup
       )
     }
   )
