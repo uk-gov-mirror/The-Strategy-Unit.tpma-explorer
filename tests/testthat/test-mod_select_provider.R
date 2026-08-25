@@ -33,7 +33,7 @@ test_that("providers reactive", {
     .package = "yyjsonr"
   )
   testthat::local_mocked_bindings(
-    "app_sys" = \(...) file.path("inst", ...),
+    "app_sys" = \(...) file.path("inst", ...)
   )
 
   # act
