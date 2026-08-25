@@ -113,6 +113,7 @@ test_that("strategy_text", {
 
 test_that("strategy_text is rendered", {
   # arrange
+  fixture <- strategy_test_fixture()
   m <- mock("html")
 
   local_mocked_bindings(
@@ -139,7 +140,8 @@ test_that("strategy_text is rendered", {
   shiny::testServer(
     mod_show_strategy_text_server,
     args = list(
-      selected_strategy = reactiveVal("strategy_a_acute")
+      selected_strategy = reactiveVal("strategy_a_acute"),
+      tpma_lookup = fixture
     ),
     {
       actual <- output$strategy_text

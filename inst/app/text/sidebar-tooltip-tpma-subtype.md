@@ -1,5 +1,4 @@
-Select a TPMA for which to display data.
-Choose a sub-type below if applicable.
+Select a TPMA sub-type if the selected TPMA has one.
 
 To search: delete the selection and start typing.
 

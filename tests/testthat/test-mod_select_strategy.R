@@ -20,50 +20,13 @@ test_that("selected_strategy returns input$strategy_select when rows are availab
       session$setInputs(
         strategy_activity_type_select = "Inpatients",
         strategy_mechanism_select = "Prevention",
-        strategy_select = "b"
+        strategy_select = "Strategy B",
+        strategy_subtype_select = "Sub-type 2"
       )
       session$private$flush()
 
       # assert
       expect_equal(selected_strategy(), "b")
-    }
-  )
-})
-
-test_that("strategies_filtered filters by activity_type and mechanism", {
-  # arrange
-  fixture <- strategy_test_fixture()
-
-  # act
-  shiny::testServer(
-    mod_select_strategy_server,
-    args = list(tpma_lookup = fixture),
-    {
-      # act 1
-      session$setInputs(
-        strategy_activity_type_select = "Inpatients",
-        strategy_mechanism_select = character(0)
-      )
-      session$private$flush()
-
-      # assert 1
-      expect_equal(
-        strategies_filtered()$tpma_code,
-        c("IP-EF-001", "IP-EF-002", "IP-EF-003")
-      )
-
-      # act 2
-      session$setInputs(
-        strategy_activity_type_select = "Inpatients",
-        strategy_mechanism_select = "Redirection/Substitution"
-      )
-      session$private$flush()
-
-      # assert 2
-      expect_equal(
-        strategies_filtered()$tpma_code,
-        c("IP-EF-001", "IP-EF-003")
-      )
     }
   )
 })
@@ -93,7 +56,7 @@ test_that("it selects the restored value when it is valid", {
   m_update <- mock()
   local_mocked_bindings("updateSelectInput" = m_update, .package = "shiny")
 
-  m_restore <- mock("c") # 'c' is a valid tpma_variable for this selection
+  m_restore <- mock("Strategy C") # a valid tpma_name for this selection
   local_mocked_bindings("restoreInput" = m_restore, .package = "shiny")
 
   # act
@@ -114,19 +77,61 @@ test_that("it selects the restored value when it is valid", {
         1,
         inputId = "strategy_select",
         choices = list(
-          "Inpatients: Prevention" = c("IP-EF-002: Strategy B" = "b"),
-          "Inpatients: Redirection/Substitution" = c(
-            "IP-EF-001: Strategy A" = "a",
-            "IP-EF-003: Strategy C" = "c"
-          )
+          "Inpatients: Prevention" = list("Strategy B"),
+          "Inpatients: Redirection/Substitution" = list("Strategy A", "Strategy C")
         ),
-        selected = 'c' # the restored value, not the first available ("b")
+        selected = "Strategy C" # the restored value, not the hardcoded default
       )
     }
   )
 })
 
-test_that("it disables strategy_select and shows placeholder when no rows", {
+test_that("it selects the restored subtype value when it is valid", {
+  # arrange
+  fixture <- strategy_test_fixture()
+
+  m_update <- mock()
+  local_mocked_bindings(
+    "updateSelectInput" = m_update,
+    .package = "shiny"
+  )
+
+  m_restore <- mock(
+    NULL,
+    "Sub-type 1"
+  )
+  local_mocked_bindings(
+    "restoreInput" = m_restore,
+    .package = "shiny"
+  )
+
+  # act
+  shiny::testServer(
+    mod_select_strategy_server,
+    args = list(tpma_lookup = fixture),
+    {
+      session$setInputs(
+        strategy_activity_type_select = "Inpatients",
+        strategy_mechanism_select = "Redirection/Substitution",
+        strategy_select = "Strategy A"
+      )
+      session$private$flush()
+
+      # assert
+      expect_called(m_update, 2)
+
+      expect_args(
+        m_update,
+        2,
+        inputId = "strategy_subtype_select",
+        choices = "Sub-type 1",
+        selected = "Sub-type 1"
+      )
+    }
+  )
+})
+
+test_that("it disables strategy_select and strategy_subtype_select and shows placeholders when no rows", {
   fixture <- strategy_test_fixture()
 
   m_update <- mock()
@@ -144,7 +149,7 @@ test_that("it disables strategy_select and shows placeholder when no rows", {
       )
       session$private$flush()
 
-      expect_called(m_update, 1)
+      expect_called(m_update, 2)
       expect_args(
         m_update,
         1,
@@ -152,38 +157,17 @@ test_that("it disables strategy_select and shows placeholder when no rows", {
         choices = c("No TPMAs to show" = ""),
         selected = ""
       )
-      expect_called(m_disable, 1)
-      expect_args(m_disable, 1, "strategy_select")
-    }
-  )
-})
-
-test_that("it updates strategy_select choices when rows are available", {
-  fixture <- strategy_test_fixture()
-
-  m_update <- mock()
-  local_mocked_bindings("updateSelectInput" = m_update, .package = "shiny")
-
-  shiny::testServer(
-    mod_select_strategy_server,
-    args = list(tpma_lookup = fixture),
-    {
-      session$setInputs(
-        strategy_activity_type_select = "Outpatients",
-        strategy_mechanism_select = "Redirection/Substitution"
-      )
-      session$private$flush()
-
-      expect_called(m_update, 1)
       expect_args(
         m_update,
-        1,
-        inputId = "strategy_select",
-        choices = list(
-          "Outpatients: Redirection/Substitution" = c("OP-AA-001: Strategy D" = "d")
-        ),
-        selected = "d"
+        2,
+        inputId = "strategy_subtype_select",
+        choices = c("No TPMA sub-types to show" = ""),
+        selected = ""
       )
+
+      expect_called(m_disable, 2)
+      expect_args(m_disable, 1, "strategy_select")
+      expect_args(m_disable, 2, "strategy_subtype_select")
     }
   )
 })

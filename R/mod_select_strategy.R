@@ -68,6 +68,23 @@ mod_select_strategy_ui <- function(id) {
         )
       ),
       choices = NULL
+    ),
+    shiny::selectInput(
+      ns("strategy_subtype_select"),
+      label = shiny::div(
+        class = "mb-2",
+        bslib::tooltip(
+          trigger = list(
+            "Select a TPMA sub-type:",
+            bsicons::bs_icon("info-circle")
+          ),
+          shiny::div(
+            style = "text-align: left;",
+            md_file_to_html("app", "text", "sidebar-tooltip-tpma-subtype.md")
+          )
+        )
+      ),
+      choices = NULL
     )
   )
 }
@@ -101,9 +118,10 @@ mod_select_strategy_server <- function(id, tpma_lookup) {
           )
       }
 
-      tpma_lookup |> dplyr::arrange(.data$tpma_code)
+      tpma_lookup |> dplyr::arrange(.data$tpma_name, .data$tpma_subtype)
     })
 
+    # TPMA name dropdown
     shiny::observe({
       choices_df <- strategies_filtered() # can be empty
 
@@ -129,8 +147,9 @@ mod_select_strategy_server <- function(id, tpma_lookup) {
           ) |>
           purrr::map(\(x) {
             x |>
-              dplyr::select("tpma_name_full", "tpma_variable") |>
-              tibble::deframe()
+              dplyr::distinct(.data$tpma_name) |>
+              dplyr::pull() |>
+              as.list() # to maintain section headers that contain one item
           })
 
         strategy_choices <- strategy_choices[sort(names(strategy_choices))]
@@ -150,7 +169,7 @@ mod_select_strategy_server <- function(id, tpma_lookup) {
         ) {
           restored_value
         } else {
-          strategy_choices[[1]][[1]] # explicitly select first available
+          "Ambulatory Care Sensitive Admissions" # set specific default
         }
 
         shiny::updateSelectInput(
@@ -166,6 +185,57 @@ mod_select_strategy_server <- function(id, tpma_lookup) {
         input$strategy_mechanism_select
       )
 
+    # TPMA sub-type dropdown
+    shiny::observe({
+      choices_df <- strategies_filtered() # can be empty
+
+      subtype_choices <- choices_df |>
+        dplyr::filter(.data$tpma_name == input$strategy_select) |>
+        dplyr::pull("tpma_subtype") |>
+        sort()
+
+      has_tpma_choices <- nrow(choices_df) > 0
+      has_subtype_choices <- length(subtype_choices) > 0
+
+      if (!has_tpma_choices || !has_subtype_choices) {
+        # Providing a message means we must set a value. We set it as an empty
+        # string and must handle this in downstream modules.
+        shiny::updateSelectInput(
+          inputId = "strategy_subtype_select",
+          choices = c("No TPMA sub-types to show" = ""),
+          selected = ""
+        )
+        shinyjs::disable("strategy_subtype_select")
+      } else {
+        # Restore sub-type value from bookmark, otherwise NULL
+        restored_value <- shiny::restoreInput(
+          id = session$ns("strategy_subtype_select"),
+          default = NULL
+        )
+
+        selected_value <- if (
+          !is.null(restored_value) &&
+            restored_value %in% subtype_choices
+        ) {
+          restored_value
+        } else {
+          subtype_choices[1] # explicitly select first available
+        }
+
+        shiny::updateSelectInput(
+          inputId = "strategy_subtype_select",
+          choices = subtype_choices,
+          selected = selected_value
+        )
+        shinyjs::enable("strategy_subtype_select")
+      }
+    }) |>
+      shiny::bindEvent(
+        input$strategy_activity_type_select,
+        input$strategy_mechanism_select,
+        input$strategy_select
+      )
+
     selected_strategy <- shiny::reactive({
       # Depend on the filtered strategies as well as the select input
       choices_df <- strategies_filtered()
@@ -175,7 +245,29 @@ mod_select_strategy_server <- function(id, tpma_lookup) {
         return(NULL)
       }
 
-      input$strategy_select
+      tpma <- input$strategy_select
+      subtype <- input$strategy_subtype_select
+
+      shiny::req(tpma) # protect against possible NULL/""
+
+      tpma_df <- choices_df |> dplyr::filter(.data$tpma_name == tpma)
+
+      # Make sure the sub-type is valid for the TPMA
+      valid_subtypes <- tpma_df |> dplyr::pull("tpma_subtype")
+      is_subtype_valid <- subtype %in% valid_subtypes
+      has_subtype <- !is.null(subtype) && subtype != "" && is_subtype_valid
+
+      if (has_subtype) {
+        tpma_df <- tpma_df |> dplyr::filter(.data$tpma_subtype == subtype)
+      }
+
+      # tpma_variable (e.g. eol_care_2_days) drives downstream data selection
+      tpma_variable <- tpma_df |> dplyr::pull("tpma_variable")
+
+      # Ensure only one value (transient states might have more)
+      shiny::req(length(tpma_variable) == 1)
+
+      tpma_variable
     })
 
     selected_strategy

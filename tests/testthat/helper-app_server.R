@@ -2,8 +2,8 @@ setup_app_server_tests <- function(.env = parent.frame()) {
   tpma_lookup_fixture <- tibble::tibble(
     tpma_code = c("AA-001", "AA-002"),
     tpma_name = c("Example TPMA one", "Example TPMA two"),
-    tpma_subtype = NA_character_,
-    tpma_name_full = c("AA-001: Example TPMA one", "AA-002: Example TPMA two"),
+    tpma_subtype = c("Sub-type one", NA_character_),
+    tpma_name_full = c("AA-001: Example TPMA one (Sub-type one)", "AA-002: Example TPMA two"),
     tpma_variable = c("strategy_1", "strategy_2"),
     activity_type = c("Inpatients", "A&E"),
     tpma_mechanism = c("Prevention", "Redirection/Substitution"),

@@ -39,7 +39,8 @@ app_server <- function(input, output, session) {
   )
   mod_show_strategy_text_server(
     "mod_show_strategy_text",
-    selected_strategy
+    selected_strategy,
+    tpma_lookup
   )
   mod_plot_rates_server(
     "mod_plot_rates",
