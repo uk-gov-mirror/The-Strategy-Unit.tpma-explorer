@@ -8,7 +8,7 @@ inputs_data_sample <- list(
     "R01"     , "a"       ,      1 ,
     "R01"     , "a"       ,      2 ,
     "R01"     , "b"       ,      1 ,
-    "R01"     , "b"       ,      2 ,
+    "R01"     , "b"       ,      2
   ),
   "diagnoses" = "diagnoses",
   "procedures" = "procedures",

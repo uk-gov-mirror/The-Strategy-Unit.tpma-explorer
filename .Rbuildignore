@@ -9,15 +9,15 @@
 ^\.vscode$
 ^air\.toml$
 ^app\.R$
-^app_data/$
+^app_data$
 ^CODEOWNERS$
 ^data-raw$
 ^deploy\.R$
 ^dev$
+^jarl\.toml$
 ^LICENSE\.md$
 ^README\.md$
 ^rsconnect$
 ^shiny_bookmarks$
 ^tpma-explorer\.Rproj$
 ^vscode_app.R$
-^app_data$
